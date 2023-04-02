@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="narasimhaa.com.mitraservice">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- SMS -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.GET_TASKS" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".AllOrdersDetailsActivity"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".ConsumerAllOrdersDetailsActivity"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AllProductsListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AllProductsListActivityCopy"
+            android:exported="false"
+            android:parentActivityName=".MaterialFilteredResultsActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".BrandsDetailsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ValidateOtpActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".NewAllUsersListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AddServicesType"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity
+            android:name=".ServiceListActivity"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity
+            android:name=".BrandsActivity"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity
+            android:name=".SizesActivity"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity
+            android:name=".AddSizesAndBrandsActivity"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity
+            android:name=".AddSubcategory"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity
+            android:name=".SubcategoryListActivity"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity
+            android:name=".AddShapeActivity"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity
+            android:name=".ShapeListActivity"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity
+            android:name=".MaterialFilteredResultsActivity"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity
+            android:name=".ImagesViewActivity"
+            android:exported="false"
+            android:parentActivityName=".SearchResultsDisplayActivity" />
+        <activity
+            android:name=".AddMaterialActivity"
+            android:exported="false"
+            android:parentActivityName=".MaterialUpdateActivity" />
+        <activity
+            android:name=".MaterialUpdateActivity"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity
+            android:name=".ImagesActivity"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity
+            android:name=".SearchResultsDisplayActivity"
+            android:exported="false"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity
+            android:name=".AllUserListAdminActivity"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ShareActivity" />
+        <activity
+            android:name=".DashBoardActivity"
+            android:label="@string/title_activity_dash_board"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LanguageActivity" />
+        <activity android:name=".ForgotPassword" />
+        <activity
+            android:name=".ServiceUpdateActivity"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity
+            android:name=".AddNewServiceActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddMyServiceActivity"
+            android:parentActivityName=".DashBoardActivity" />
+        <activity android:name=".MyprofileActivity" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+    </application>
+
+</manifest>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="specificdata">
+    <item name="Service mechanic">Service mechanic</item>
+    <item name="Business Owner">Business Owner</item>
+
+    </string-array>
+
+    <string-array name="userdata" >
+        <item name="User type">user type</item>
+        <item name="Business type">user type</item>
+    </string-array>
+    <string-array name="country_arrays">
+        <item>Malaysia</item>
+        <item>United States</item>
+        <item>Indonesia</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Singapore</item>
+        <item>New Zealand</item>
+        <item>India</item>
+    </string-array>
+
+</resources>

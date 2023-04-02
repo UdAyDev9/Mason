@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/MYProfile"
+            android:icon="@drawable/ic_profile"
+            android:title="My Profile"
+
+            />
+
+
+
+        <item
+            android:id="@+id/nav_add_brand_size"
+            android:icon="@drawable/ic_blur_on_black_24dp"
+            android:title="Add Brand &amp; Size" />
+
+
+        <item
+            android:id="@+id/nav_brand_list"
+            android:icon="@drawable/ic_baseline_branding_watermark"
+            android:title="Brands List" />
+
+        <item
+            android:id="@+id/nav_sevice"
+            android:icon="@drawable/ic_baseline_branding_watermark"
+            android:title="Add serives Name"/>
+
+        <item
+            android:id="@+id/nav_list"
+            android:icon="@drawable/ic_baseline_branding_watermark"
+            android:title="Services List"/>
+        <item
+            android:id="@+id/nav_sizes_list"
+            android:icon="@drawable/ic_baseline_1x_size"
+            android:title="Sizes List" />
+        <item
+            android:id="@+id/nav_addsub"
+            android:icon="@drawable/ic_baseline_branding_watermark"
+            android:title="Add Sub Category" />
+        <item
+            android:id="@+id/nav_addsublist"
+            android:icon="@drawable/ic_baseline_branding_watermark"
+            android:title=" Sub Category List" />
+        <item
+            android:id="@+id/nav_addshape"
+            android:icon="@drawable/ic_baseline_branding_watermark"
+            android:title=" Add Shape" />
+        <item
+            android:id="@+id/nav_shapelist"
+            android:icon="@drawable/ic_baseline_branding_watermark"
+            android:title=" Shape List" />
+
+        <item
+            android:id="@+id/nav_dealer_list"
+            android:icon="@drawable/ic_users"
+            android:title="Dealer List"
+            android:visible="true"
+            />
+
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+
+            <item
+                android:id="@+id/nav_signout"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Signout" />
+        </menu>
+    </item>
+
+</menu>

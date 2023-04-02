@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="apptheme_color">#ff9800</color>
+
+
+  <color name="home_txt_color">#282828</color>
+  <color name="home_txt1_color">#787878</color>
+
+  <color name="home_line_color">#d7d7d7</color>
+
+
+    <color name="background_color">#e6e6e6</color>
+  <color name="btn_color_gray">#a9a9a9</color>
+
+
+     <color name="cyan">#00BCD4</color>
+    <color name="teel">#009688</color>
+  	<color name="yellow">  #FFEA00</color>
+	<color name="brown">#795548</color>
+	
+	
+        <color name="blueGray">#263238</color>
+   	    <color name="brownDark">#3E2723</color>
+	
+	
+	
+	
+ 
+     <color name="black">#000000</color>
+    <color name="text_lgray">#808080</color>
+    <color name="text_gray">#323232</color>
+    <color name="red">#FFFF0000</color>
+    <color name="blue">#FF0000FF</color>
+    <color name="transparent_blue">#800000FF</color>
+    <color name="green">#32c24d</color>
+    <color name="green_light">#FF99CC00</color>
+    <color name="orange">#FFFFBB33</color>
+    <color name="transparent_orange">#80FFBB33</color>
+    <color name="purple">#FFAA66CC</color>
+    <color name="bg_gray">#ebebeb</color>
+    <color name="bg_light_white">#f0f0f0</color>
+    <color name="titleLogoColor">#005496</color>
+    <color name="titleColor">#b75a88</color>
+    <color name="titleSubColor">#aaafb3</color>
+     <color name="lightGray">#545454</color>
+
+
+
+  <color name="rb_selected_color">#b3b3b3</color>
+
+  <color name="colorPrimaryOrange">#ff9800</color>
+
+  <color name="colorPrimary">#1e88e5</color>
+  <color name="colorPrimaryDark">#0a80d1</color>
+  <color name="colorAccent">#49b9ff</color>
+    
+    <color name="white">#ffffff</color>
+    <color name="feed_bg">#d3d6db</color>
+    <color name="feed_item_bg">#ffffff</color>
+    <color name="feed_item_border">#c2c3c8</color>
+    <color name="link">#0a80d1</color>
+    <color name="timestamp">#a0a3a7</color>
+    <color name="textview_color_white">#FFFFFF</color>
+    <color name="textview_color_light">#F6F0F0</color>
+
+    
+   <bool name="default_circle_indicator_centered">true</bool> 
+  <color name="default_circle_indicator_fill_color">#ff9800</color> 
+  <color name="default_circle_indicator_page_color">#00000000</color> 
+  <integer name="default_circle_indicator_orientation">0</integer> 
+  <dimen name="default_circle_indicator_radius">5dp</dimen> 
+  <bool name="default_circle_indicator_snap">false</bool> 
+  <color name="default_circle_indicator_stroke_color">#ff9800</color> 
+  <dimen name="default_circle_indicator_stroke_width">2dp</dimen>
+
+
+  <color name="cc_bg_color">#a0a3a7</color>
+
+
+  <color name="transparent">#00000000</color>
+
+
+  
+  
+  <!--     60000000 -->
+        <color name="table_shadow_start">#2d75ae</color>
+    <color name="table_shadow_end">#00000000</color>
+    
+
+</resources>

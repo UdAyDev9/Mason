@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/parentView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="9dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    style="@style/TextViewStyle"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:text="Business Name" />
+
+                <TextView
+
+                    style="@style/TextViewStyle"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.2"
+                    android:text=":" />
+
+                <TextView
+                    android:id="@+id/tv_business_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5.8"
+                    android:paddingLeft="5dp"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/lyt_BusinessName1"
+                android:weightSum="10">
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:text="Name" />
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_weight="0.2"
+                    android:text=":" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    style="@style/TextViewStyle"
+                    android:layout_weight="5.8"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:text="Mobile No" />
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_weight="0.2"
+                    android:text=":" />
+
+                <TextView
+                    android:id="@+id/tv_mobile"
+                    style="@style/TextViewStyle"
+                    android:layout_weight="5.8"
+                    android:autoLink="phone"
+                    android:linksClickable="true"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lytUserType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:text="Product Name" />
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_weight="0.2"
+                    android:text=":" />
+
+                <TextView
+                    android:id="@+id/tv_material_type"
+                    style="@style/TextViewStyle"
+                    android:layout_weight="5.8"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:weightSum="10">
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:text="Sub Categeory" />
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_weight="0.2"
+                    android:text=":" />
+
+                <TextView
+                    android:id="@+id/tv_sub_category"
+                    style="@style/TextViewStyle"
+                    android:layout_weight="5.8"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:weightSum="10">
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:text="Shape" />
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_weight="0.2"
+                    android:text=":" />
+
+                <TextView
+                    android:id="@+id/tv_shape"
+                    style="@style/TextViewStyle"
+                    android:layout_weight="5.8"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:weightSum="10">
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:text="Brand Name" />
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_weight="0.2"
+                    android:text=":" />
+
+                <TextView
+                    android:id="@+id/tv_brand_names_"
+                    style="@style/TextViewStyle"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5.8"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tv_more_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        style="@style/TextViewStyle"
+                        android:layout_weight="4"
+                        android:paddingLeft="5dp"
+                        android:text="City" />
+
+                    <TextView
+                        style="@style/TextViewStyle"
+                        android:layout_weight="0.2"
+                        android:text=":" />
+
+                    <TextView
+                        android:id="@+id/tv_city"
+                        style="@style/TextViewStyle"
+                        android:layout_weight="5.8"
+                        android:paddingLeft="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="10">
+
+                    <TextView
+                        style="@style/TextViewStyle"
+                        android:layout_weight="4"
+                        android:paddingLeft="5dp"
+                        android:text="District" />
+
+                    <TextView
+                        style="@style/TextViewStyle"
+                        android:layout_weight="0.2"
+                        android:text=":" />
+
+                    <TextView
+                        android:id="@+id/tv_district"
+                        style="@style/TextViewStyle"
+                        android:layout_weight="5.8"
+                        android:paddingLeft="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tv_more_"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="10">
+
+                    <TextView
+                        style="@style/TextViewStyle"
+                        android:layout_weight="4"
+                        android:paddingLeft="5dp"
+                        android:text="State" />
+
+                    <TextView
+                        style="@style/TextViewStyle"
+                        android:layout_weight="0.2"
+                        android:text=":" />
+
+                    <TextView
+                        android:id="@+id/tv_state"
+                        style="@style/TextViewStyle"
+                        android:layout_weight="4"
+                        android:paddingLeft="5dp" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tv_more_ref"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:weightSum="10">
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:text="Address" />
+
+                <TextView
+                    style="@style/TextViewStyle"
+                    android:layout_weight="0.2"
+                    android:text=":" />
+
+                <TextView
+                    android:id="@+id/tv_address_"
+                    style="@style/TextViewStyle"
+                    android:layout_weight="5"
+                    android:paddingLeft="5dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressbar"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+</LinearLayout>
+
