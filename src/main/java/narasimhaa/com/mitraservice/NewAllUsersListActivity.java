@@ -82,7 +82,7 @@ public class NewAllUsersListActivity extends AppCompatActivity {
 
         Call<MaterialFilterResponseFull> userCall;
 
-            userCall = apiInterface.getAllUsers();
+            userCall = apiInterface.getAllUsers("Dealer");
 
         userCall.enqueue(new Callback<MaterialFilterResponseFull>() {
             @Override

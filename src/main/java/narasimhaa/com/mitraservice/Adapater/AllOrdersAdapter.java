@@ -64,6 +64,8 @@ public class AllOrdersAdapter extends RecyclerView.Adapter<AllOrdersAdapter.MyRe
             holder.tvOrderId.setText(dataItem.getORD_ID());
             holder.tv_ordered_on.setText(dataItem.getCREATED_DATETIME());
             holder.tv_door_delivery.setText(dataItem.getDELIVERY_TYPE());
+            holder.tv_order_city.setText(dataItem.getCITY());
+
 
             switch (list.get(position).getSTATUS()){
 
@@ -108,7 +110,7 @@ public class AllOrdersAdapter extends RecyclerView.Adapter<AllOrdersAdapter.MyRe
     public class MyResultsViewHolder extends RecyclerView.ViewHolder {
 
 
-        private TextView tvMaterialType, tvBusinessName, tv_door_delivery, tvOrderId, tvBrandNames, tv_ordered_on, textView7, tv_sub_category, tv_shape, tv_size, tv_mrp, tv_offer_price, tv_pending, tv_quoted, tv_processed, tv_delivered;
+        private TextView tvMaterialType, tvBusinessName, tv_door_delivery, tvOrderId, tvBrandNames, tv_ordered_on, textView7, tv_sub_category, tv_shape, tv_size, tv_mrp, tv_offer_price, tv_pending, tv_quoted, tv_processed, tv_delivered,tv_order_city;
         private Button update_btn;
         private AppCompatTextView txt_totalProductPrice, tvQuantity, plus, minus;
         private LinearLayout moreDetailsLayout, quantityLayout;
@@ -126,6 +128,7 @@ public class AllOrdersAdapter extends RecyclerView.Adapter<AllOrdersAdapter.MyRe
             tv_shape = itemView.findViewById(R.id.tv_shape);
             tv_size = itemView.findViewById(R.id.tv_size);
             tv_mrp = itemView.findViewById(R.id.tv_mrp);
+            tv_order_city = itemView.findViewById(R.id.tv_order_city);
             tv_offer_price = itemView.findViewById(R.id.tv_offer_price);
             tv_door_delivery = itemView.findViewById(R.id.tv_door_delivery);
             tv_ordered_on = itemView.findViewById(R.id.tv_ordered_on);

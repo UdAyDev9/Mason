@@ -148,7 +148,7 @@ public interface ApiInterface {
     Call<ServerResponse> forgotPassword(@Body String body);
 
     @GET("Users/getAllUsers")
-    Call<MaterialFilterResponseFull> getAllUsers();
+    Call<MaterialFilterResponseFull> getAllUsers(@Query("USER_TYPE") String USER_TYPE);
 
     @POST("Admin/insertSizeBrand")
     Call<ServerResponse> insertSizeAndBrand(@Body String body);

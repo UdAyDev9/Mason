@@ -1211,17 +1211,6 @@ public static void cancelAlertDialog(Context context){
 	return false;
 	}
 
-
-
-
-
-
-	
-
-
-
-
-
 	/**
 	 * Return date in specified format.
 	 * @param milliSeconds Date in milliseconds

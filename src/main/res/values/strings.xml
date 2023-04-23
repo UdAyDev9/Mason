@@ -99,4 +99,10 @@
     L Shape,C Shape and Hollow Square and Hollow Round
     -->
 
+    <string-array name="user_types_array">
+        <item>Dealer</item>
+        <item>Consumer</item>
+        <item>Material Supplier</item>
+    </string-array>
+
 </resources>

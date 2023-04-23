@@ -1,7 +1,14 @@
 package narasimhaa.com.mitraservice;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +21,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.kinda.alert.KAlertDialog;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import narasimhaa.com.mitraservice.Adapater.AllUserListAdminAdapter;
@@ -32,7 +42,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class AllUserListAdminActivity extends AppCompatActivity {
+public class AllUserListAdminActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
     RecyclerView recyclerView;
     AllUserListAdminAdapter materialRelsutsAdapter;
@@ -40,8 +50,10 @@ public class AllUserListAdminActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     private Toolbar toolbar;
     private TextView tvNoData;
+    private AutoCompleteTextView ll_user_type;
+    private EditText date;
 
-
+    final Calendar myCalendar = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +64,7 @@ public class AllUserListAdminActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = findViewById(R.id.recycler_view);
         tvNoData = findViewById(R.id.tv_no_data);
+        initViews();
         getData("","","");
 
         recyclerView.setHasFixedSize(true);
@@ -79,9 +92,9 @@ public class AllUserListAdminActivity extends AppCompatActivity {
 
         JsonObject paramObject = new JsonObject();
 
-        paramObject.addProperty("USER_TYPE", SharedPreferenceUtils.getValue(AllUserListAdminActivity.this, MyUtilities.PREF_USER_TYPE));
+        paramObject.addProperty("USER_TYPE", "Dealer");
 
-        Call<MaterialFilterResponseFull> userCall = apiInterface.getAllUsers();
+        Call<MaterialFilterResponseFull> userCall = apiInterface.getAllUsers(ll_user_type.getText().toString());
 
         userCall.enqueue(new Callback<MaterialFilterResponseFull>() {
             @Override
@@ -99,6 +112,7 @@ public class AllUserListAdminActivity extends AppCompatActivity {
                         data = response.body().getData();
                         if (data.size()>0){
                             recyclerView.setVisibility(View.VISIBLE);
+                            Log.e("Size is ", "onResponse: "+data.size());
                             materialRelsutsAdapter = new AllUserListAdminAdapter(data, AllUserListAdminActivity.this);
                             recyclerView.setAdapter(materialRelsutsAdapter);
                             //materialRelsutsAdapter.notifyDataSetChanged();
@@ -143,7 +157,7 @@ public class AllUserListAdminActivity extends AppCompatActivity {
     }
 
 
-    public void updateStatus(String email,String status) {
+    public void updateStatus(String email,String ll_user_type) {
 
         MyUtilities.showAlertDialog(AllUserListAdminActivity.this, KAlertDialog.PROGRESS_TYPE, MyUtilities.KAlertDialogTitleLoding);
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -165,7 +179,7 @@ public class AllUserListAdminActivity extends AppCompatActivity {
 
         JsonObject paramObject = new JsonObject();
         paramObject.addProperty("EMAIL_ID", email);
-        paramObject.addProperty("STATUS", status);
+        paramObject.addProperty("STATUS", ll_user_type);
 
         Call<ServerResponse> userCall = apiInterface.changeUserStatus(paramObject.toString());
         //Call<ServerResponse> userCall = apiInterface.changeUserStatus(paramObject.toString());
@@ -207,17 +221,51 @@ public class AllUserListAdminActivity extends AppCompatActivity {
     }
 
 
-    public void onClickUpdateDealerActiveState(String email,String status){{
+    public void onClickUpdateDealerActiveState(String email,String ll_user_type){{
 
 
-        updateStatus(email,status);
+        updateStatus(email,ll_user_type);
 
-        //MyUtilities.showToast(AllUserListAdminActivity.this,email + "   " +status);
-
-    }
+        //MyUtilities.showToast(AllUserListAdminActivity.this,email + "   " +ll_user_type);
 
     }
 
+    }
+
+    private void initViews() {
+        ll_user_type = findViewById(R.id.ll_user_type);
+        date = findViewById(R.id.date);
+        ll_user_type.setText(getResources().getStringArray(R.array.user_types_array)[0]);
+        date.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(AllUserListAdminActivity.this, AllUserListAdminActivity.this, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+        ll_user_type.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.user_types_array)));
+
+       ll_user_type.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ll_user_type.getAdapter() != null) {
+                    ll_user_type.showDropDown();
+                }
+            }
+        });
+        ll_user_type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                getData("","","");
+            }
+        });
+    }
 
 
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+        date.setText(datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth());
+    }
 }

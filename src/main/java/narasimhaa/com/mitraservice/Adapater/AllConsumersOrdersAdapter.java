@@ -46,7 +46,6 @@ public class AllConsumersOrdersAdapter extends RecyclerView.Adapter<AllConsumers
 
             OrdersDataItem dataItem = list.get(position);
 
-
             holder.tvMaterialType.setText(dataItem.getS_NAME());
             holder.tvBusinessName.setText(dataItem.getB_NAME());
             holder.tvBrandNames.setText(dataItem.getBRAND_NAME());
@@ -57,6 +56,7 @@ public class AllConsumersOrdersAdapter extends RecyclerView.Adapter<AllConsumers
             holder.tvOrderId.setText(dataItem.getORD_ID());
             holder.tv_ordered_on.setText(dataItem.getCREATED_DATETIME());
             holder.tv_door_delivery.setText(dataItem.getDELIVERY_TYPE());
+            holder.tv_order_city.setText(dataItem.getCITY());
             switch (list.get(position).getSTATUS()){
 
                 case MyUtilities.ORDER_STATUS_PENDING :
@@ -96,7 +96,7 @@ public class AllConsumersOrdersAdapter extends RecyclerView.Adapter<AllConsumers
     public class MyResultsViewHolder extends RecyclerView.ViewHolder {
 
 
-        private TextView tvMaterialType, tvBusinessName, tv_door_delivery, tvOrderId, tvBrandNames, tv_ordered_on, textView7, tv_sub_category, tv_shape, tv_size, tv_mrp, tv_offer_price,tv_pending, tv_quoted, tv_processed, tv_delivered;
+        private TextView tvMaterialType, tvBusinessName, tv_door_delivery, tvOrderId, tvBrandNames, tv_ordered_on, textView7, tv_sub_category, tv_shape, tv_size, tv_mrp, tv_offer_price,tv_pending, tv_quoted, tv_processed, tv_delivered,tv_order_city;
         private Button update_btn;
         private AppCompatTextView txt_totalProductPrice, tvQuantity, plus, minus;
         private LinearLayout moreDetailsLayout, quantityLayout;
@@ -106,6 +106,7 @@ public class AllConsumersOrdersAdapter extends RecyclerView.Adapter<AllConsumers
 
         public MyResultsViewHolder(@NonNull View itemView) {
             super(itemView);
+
             tvMaterialType = itemView.findViewById(R.id.tv_material_type);
             tvBusinessName = itemView.findViewById(R.id.tv_business_name);
             tvBrandNames = itemView.findViewById(R.id.tv_brand_names_);
@@ -123,6 +124,7 @@ public class AllConsumersOrdersAdapter extends RecyclerView.Adapter<AllConsumers
             tv_processed = itemView.findViewById(R.id.tv_processed);
             tv_delivered = itemView.findViewById(R.id.tv_delivered);
             checkbox = (CheckBox) itemView.findViewById(R.id.checkbox);
+            tv_order_city = (TextView) itemView.findViewById(R.id.tv_order_city);
 
 
 
