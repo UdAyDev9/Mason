@@ -177,7 +177,7 @@ public class ShapeListActivity extends AppCompatActivity {
 
 
         JsonObject paramObject = new JsonObject();
-        paramObject.addProperty("HEIGHT", material);
+        paramObject.addProperty("SHAPE", material);
 
         Call<ServicesResponseSizeBrand> userCall = apiInterface.deleteShape(paramObject.toString());
 

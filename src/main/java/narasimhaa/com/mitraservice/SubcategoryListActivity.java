@@ -175,7 +175,7 @@ public class SubcategoryListActivity extends AppCompatActivity {
 
 
         JsonObject paramObject = new JsonObject();
-        paramObject.addProperty("BTYPE", material);
+        paramObject.addProperty("SUB_CATEGORY", material);
 
         Call<ServicesResponseSizeBrand> userCall = apiInterface.deleteSubCatagory(paramObject.toString());
 

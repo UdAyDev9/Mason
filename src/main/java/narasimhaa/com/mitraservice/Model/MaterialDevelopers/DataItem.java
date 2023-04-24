@@ -16,7 +16,7 @@ public class DataItem{
 	@SerializedName("MRP")
 	private String mRP;
 
-	@SerializedName("HEIGHT")
+	@SerializedName("STEEL_SHAPE")
 	private String hEIGHT;
 
 	@SerializedName("STATUS")
@@ -28,7 +28,7 @@ public class DataItem{
 	@SerializedName("DESCRIPTION")
 	private String dESCRIPTION;
 
-	@SerializedName("BUSINESS_TYPE")
+	@SerializedName("STEEL_SUB_CATEGORY")
 	private String bUSINESSTYPE;
 
 	@SerializedName("BRAND_NAME")
@@ -46,7 +46,7 @@ public class DataItem{
 	@SerializedName("DOOR_DELIVERY")
 	private String dOORDELIVERY;
 
-	@SerializedName("WEIGHT")
+	@SerializedName("STEEL_SIZE")
 	private String wEIGHT;
 
 	private boolean isSelected;

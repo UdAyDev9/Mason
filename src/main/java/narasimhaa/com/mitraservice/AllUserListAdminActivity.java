@@ -21,6 +21,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.kinda.alert.KAlertDialog;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -65,7 +67,11 @@ public class AllUserListAdminActivity extends AppCompatActivity implements DateP
         recyclerView = findViewById(R.id.recycler_view);
         tvNoData = findViewById(R.id.tv_no_data);
         initViews();
-        getData("","","");
+        try {
+            getData("","","");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(AllUserListAdminActivity.this);
@@ -73,7 +79,7 @@ public class AllUserListAdminActivity extends AppCompatActivity implements DateP
 
     }
 
-    public void getData(String service,String city,String businessType) {
+    public void getData(String service,String city,String businessType) throws ParseException {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -90,11 +96,18 @@ public class AllUserListAdminActivity extends AppCompatActivity implements DateP
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
-        JsonObject paramObject = new JsonObject();
+        String sDate1=date.getText().toString();
+        Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(sDate1);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = dateFormat.format(date1);
 
-        paramObject.addProperty("USER_TYPE", "Dealer");
+        Call<MaterialFilterResponseFull> userCall;
+        if (ll_user_type.getText().toString().equalsIgnoreCase("Retailer")){
 
-        Call<MaterialFilterResponseFull> userCall = apiInterface.getAllUsers(ll_user_type.getText().toString());
+            userCall = apiInterface.getAllUsers("Consumer",strDate);
+        }else {
+            userCall = apiInterface.getAllUsers(ll_user_type.getText().toString(),strDate);
+        }
 
         userCall.enqueue(new Callback<MaterialFilterResponseFull>() {
             @Override
@@ -106,7 +119,6 @@ public class AllUserListAdminActivity extends AppCompatActivity implements DateP
 
 
                         MyUtilities.cancelAlertDialog(AllUserListAdminActivity.this);
-
 
                         data.clear();
                         data = response.body().getData();
@@ -195,7 +207,11 @@ public class AllUserListAdminActivity extends AppCompatActivity implements DateP
 
                         MyUtilities.cancelAlertDialog(AllUserListAdminActivity.this);
 
-                        getData("","","");
+                        try {
+                            getData("","","");
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     } else {
 
                         MyUtilities.cancelAlertDialog(AllUserListAdminActivity.this);
@@ -258,7 +274,11 @@ public class AllUserListAdminActivity extends AppCompatActivity implements DateP
         ll_user_type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                getData("","","");
+                try {
+                    getData("","","");
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -267,5 +287,10 @@ public class AllUserListAdminActivity extends AppCompatActivity implements DateP
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         date.setText(datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth());
+        try {
+            getData("","","");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

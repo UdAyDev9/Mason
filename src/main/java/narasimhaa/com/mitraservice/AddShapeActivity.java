@@ -83,7 +83,7 @@ public class AddShapeActivity extends AppCompatActivity {
 
             JsonObject jsonReg = new JsonObject();
 
-            jsonReg.addProperty("HEIGHT", servicestr);
+            jsonReg.addProperty("SHAPE", servicestr);
 
 
             Call<ServerResponse> userCall;

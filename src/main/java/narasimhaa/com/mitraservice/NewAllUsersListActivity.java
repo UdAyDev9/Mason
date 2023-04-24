@@ -50,7 +50,7 @@ public class NewAllUsersListActivity extends AppCompatActivity {
         getAllUsers(false);
         toolbar = (Toolbar) findViewById(R.id.toolbar_extra);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("All Users");
+        getSupportActionBar().setTitle("Dealer List");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(NewAllUsersListActivity.this);
@@ -82,7 +82,7 @@ public class NewAllUsersListActivity extends AppCompatActivity {
 
         Call<MaterialFilterResponseFull> userCall;
 
-            userCall = apiInterface.getAllUsers("Dealer");
+            userCall = apiInterface.getAllUsers("Dealer","");
 
         userCall.enqueue(new Callback<MaterialFilterResponseFull>() {
             @Override

@@ -930,13 +930,13 @@ public class AddMaterialActivity extends AppCompatActivity {
             jsonReg.addProperty("SERVICE_TYPE", strMaterialType);
             jsonReg.addProperty("BUSINESS_NAME", strBusinessName);
             //Here sending SubCategory Shape as BUSINESS_TYPE
-            jsonReg.addProperty("BUSINESS_TYPE", strSubCategory);
+            jsonReg.addProperty("STEEL_SUB_CATEGORY", strSubCategory);
             jsonReg.addProperty("BRAND_NAME", strMaterialTypeBrand);
             jsonReg.addProperty("DOOR_DELIVERY", strDoorDelivery);
             jsonReg.addProperty("DESCRIPTION", strDescription);
-            jsonReg.addProperty("WEIGHT", strMaterialTypeSize);
+            jsonReg.addProperty("STEEL_SIZE", strMaterialTypeSize);
             //Here sending Shape as HEIGHT
-            jsonReg.addProperty("HEIGHT", strShapeType);
+            jsonReg.addProperty("STEEL_SHAPE", strShapeType);
             jsonReg.addProperty("MRP", strMRP);
             jsonReg.addProperty("PRICE", strPrice);
             Call<ServerResponse> userCall;

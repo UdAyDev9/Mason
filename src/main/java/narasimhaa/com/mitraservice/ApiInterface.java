@@ -61,24 +61,24 @@ public interface ApiInterface {
 
     // shape// HEIGHT
 
-    @GET("Admin/getHeights")
+    @GET("Admin/getShapes")
     Call<ServicesResponseSizeBrand> getShapes();
 
-    @POST("Admin/insertHeight")
+    @POST("Admin/insertShape")
     Call<ServerResponse> addShape(@Body String body);
 
-    @POST("Admin/deleteHeight")
+    @POST("Admin/deleteShape")
     Call<ServicesResponseSizeBrand> deleteShape(@Body String body);
 
     // sub categeory// BTYPE
 
-    @GET("Admin/getBusinessTypes")
+    @GET("Admin/getSubCategories")
     Call<ServicesResponseSizeBrand> getSubCategories();
 
-    @POST("Admin/insertBusinessType")
+    @POST("Admin/insertSubCategory")
     Call<ServerResponse> addSubCategory(@Body String body);
 
-    @POST("Admin/deleteBusinessType")
+    @POST("Admin/deleteSubCategory")
     Call<ServicesResponseSizeBrand> deleteSubCatagory(@Body String body);
 
 
@@ -148,7 +148,7 @@ public interface ApiInterface {
     Call<ServerResponse> forgotPassword(@Body String body);
 
     @GET("Users/getAllUsers")
-    Call<MaterialFilterResponseFull> getAllUsers(@Query("USER_TYPE") String USER_TYPE);
+    Call<MaterialFilterResponseFull> getAllUsers(@Query("USER_TYPE") String USER_TYPE,@Query("REGISTRATION_DATE") String REGISTRATION_DATE);
 
     @POST("Admin/insertSizeBrand")
     Call<ServerResponse> insertSizeAndBrand(@Body String body);

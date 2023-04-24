@@ -83,7 +83,7 @@ public class AddSubcategory extends AppCompatActivity {
 
             JsonObject jsonReg = new JsonObject();
 
-            jsonReg.addProperty("BTYPE", servicestr);
+            jsonReg.addProperty("SUB_CATEGORY", servicestr);
 
 
             Call<ServerResponse> userCall;
