@@ -104,7 +104,7 @@ public class AllUserListAdminActivity extends AppCompatActivity implements DateP
         Call<MaterialFilterResponseFull> userCall;
         if (ll_user_type.getText().toString().equalsIgnoreCase("Retailer")){
 
-            userCall = apiInterface.getAllUsers("Consumer",strDate);
+            userCall = apiInterface.getAllUsers("Retailer",strDate);
         }else {
             userCall = apiInterface.getAllUsers(ll_user_type.getText().toString(),strDate);
         }
@@ -116,7 +116,6 @@ public class AllUserListAdminActivity extends AppCompatActivity implements DateP
                 if (response.body() != null) {
 
                     if (response.body().isStatus() == true) {
-
 
                         MyUtilities.cancelAlertDialog(AllUserListAdminActivity.this);
 
@@ -293,4 +292,6 @@ public class AllUserListAdminActivity extends AppCompatActivity implements DateP
             e.printStackTrace();
         }
     }
+
+
 }
