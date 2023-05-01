@@ -1,5 +1,7 @@
 package narasimhaa.com.mitraservice.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class OrdersDataItem {
 
     private String N_ITEMS;
@@ -39,6 +41,18 @@ public class OrdersDataItem {
     private String EMAIL_ID;
 
     private String PINCODE_NO;
+
+    @SerializedName("WEIGHT")
+    private String wEIGHT;
+
+    @SerializedName("LENGTH")
+    private String LENGTH;
+    @SerializedName("THICKNESS")
+    private String THICKNESS;
+
+    @SerializedName("PERIMETER")
+    private String PERIMETER;
+
 
     public String getN_ITEMS ()
     {
@@ -228,5 +242,37 @@ public class OrdersDataItem {
     public void setPINCODE_NO (String PINCODE_NO)
     {
         this.PINCODE_NO = PINCODE_NO;
+    }
+
+    public String getwEIGHT() {
+        return wEIGHT;
+    }
+
+    public void setwEIGHT(String wEIGHT) {
+        this.wEIGHT = wEIGHT;
+    }
+
+    public String getLENGTH() {
+        return LENGTH;
+    }
+
+    public void setLENGTH(String LENGTH) {
+        this.LENGTH = LENGTH;
+    }
+
+    public String getTHICKNESS() {
+        return THICKNESS;
+    }
+
+    public void setTHICKNESS(String THICKNESS) {
+        this.THICKNESS = THICKNESS;
+    }
+
+    public String getPERIMETER() {
+        return PERIMETER;
+    }
+
+    public void setPERIMETER(String PERIMETER) {
+        this.PERIMETER = PERIMETER;
     }
 }

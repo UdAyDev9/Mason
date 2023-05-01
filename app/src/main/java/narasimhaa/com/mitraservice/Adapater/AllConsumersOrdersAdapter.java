@@ -58,6 +58,11 @@ public class AllConsumersOrdersAdapter extends RecyclerView.Adapter<AllConsumers
             holder.tv_door_delivery.setText(dataItem.getDELIVERY_TYPE());
             holder.tv_order_city.setText(dataItem.getCITY());
             holder.tv_order_status.setText(dataItem.getSTATUS());
+            holder.tv_perimeter.setText(dataItem.getPERIMETER());
+            holder.tv_length.setText(dataItem.getLENGTH());
+            holder.tv_thickness.setText(dataItem.getTHICKNESS());
+            holder.tv_weight.setText(dataItem.getwEIGHT());
+
             switch (list.get(position).getSTATUS()){
 
                 case MyUtilities.ORDER_STATUS_PENDING :
@@ -97,7 +102,7 @@ public class AllConsumersOrdersAdapter extends RecyclerView.Adapter<AllConsumers
     public class MyResultsViewHolder extends RecyclerView.ViewHolder {
 
 
-        private TextView tvMaterialType, tvBusinessName, tv_door_delivery, tvOrderId, tvBrandNames, tv_ordered_on, textView7, tv_sub_category, tv_shape, tv_size, tv_mrp, tv_offer_price,tv_pending, tv_quoted, tv_processed, tv_delivered,tv_order_city,tv_order_status;
+        private TextView tvMaterialType, tvBusinessName, tv_door_delivery, tvOrderId, tvBrandNames, tv_ordered_on, textView7, tv_sub_category, tv_shape, tv_size, tv_mrp, tv_offer_price,tv_pending, tv_quoted, tv_processed, tv_delivered,tv_order_city,tv_order_status,tv_perimeter, tv_length, tv_weight, tv_thickness;
         private Button update_btn;
         private AppCompatTextView txt_totalProductPrice, tvQuantity, plus, minus;
         private LinearLayout moreDetailsLayout, quantityLayout;
@@ -127,6 +132,11 @@ public class AllConsumersOrdersAdapter extends RecyclerView.Adapter<AllConsumers
             checkbox = (CheckBox) itemView.findViewById(R.id.checkbox);
             tv_order_city = (TextView) itemView.findViewById(R.id.tv_order_city);
             tv_order_status = (TextView) itemView.findViewById(R.id.tv_order_status);
+            tv_perimeter = itemView.findViewById(R.id.tv_perimeter);
+            tv_length    = itemView.findViewById(R.id.tv_length);
+            tv_weight    = itemView.findViewById(R.id.tv_weight);
+            tv_thickness = itemView.findViewById(R.id.tv_thickness);
+
 
 
 

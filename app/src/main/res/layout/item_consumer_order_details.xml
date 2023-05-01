@@ -143,7 +143,7 @@
                                  android:paddingLeft="15dp"
                                  android:text="Hello"
                                  android:textColor="@color/black"
-                                 android:textSize="16sp" />
+                                 android:textSize="14sp" />
 
                          </RelativeLayout>
 
@@ -172,7 +172,7 @@
                                  android:paddingLeft="15dp"
                                  android:text="Hello"
                                  android:textColor="@color/black"
-                                 android:textSize="16sp" />
+                                 android:textSize="14sp" />
 
                          </RelativeLayout>
 
@@ -201,7 +201,7 @@
                                  android:paddingLeft="15dp"
                                  android:text="Hello"
                                  android:textColor="@color/black"
-                                 android:textSize="16sp" />
+                                 android:textSize="14sp" />
 
                          </RelativeLayout>
 
@@ -229,7 +229,7 @@
                                  android:layout_alignLeft="@id/colon6"
                                  android:paddingLeft="15dp"
                                  android:text="Hello"
-                                 android:textSize="16sp"
+                                 android:textSize="14sp"
                                  android:textColor="@color/black"/>
 
                          </RelativeLayout>
@@ -258,7 +258,7 @@
                                  android:layout_alignLeft="@id/colon9"
                                  android:paddingLeft="15dp"
                                  android:text="Hello"
-                                 android:textSize="16sp"
+                                 android:textSize="14sp"
                                  android:textColor="@color/black"/>
 
                          </RelativeLayout>-->
@@ -310,6 +310,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textSize="14sp"
+                                android:layout_marginStart="2dp"
                                 app:layout_constraintStart_toStartOf="@+id/guideline"
                                 app:layout_constraintTop_toTopOf="parent"
                                 tools:text="JWTIY" />
@@ -320,6 +321,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textSize="14sp"
+                                android:layout_marginStart="2dp"
                                 app:layout_constraintStart_toStartOf="@+id/tv_material_type"
                                 app:layout_constraintTop_toBottomOf="@+id/tv_material_type"
                                 tools:text="JWTIY" />
@@ -342,6 +344,7 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="14sp"
                                 android:layout_marginTop="5dp"
+                                android:layout_marginStart="2dp"
                                 app:layout_constraintStart_toStartOf="@+id/guideline"
                                 app:layout_constraintTop_toBottomOf="@+id/textView8"
                                 tools:text="JWTIY" />
@@ -362,6 +365,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textSize="14sp"
+                                android:layout_marginStart="2dp"
                                 app:layout_constraintStart_toStartOf="@+id/guideline"
                                 app:layout_constraintTop_toBottomOf="@+id/tv_sub_category"
                                 tools:text="JWTIY" />
@@ -382,6 +386,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
+                                android:layout_marginStart="2dp"
                                 android:textSize="14sp"
                                 app:layout_constraintStart_toStartOf="@+id/guideline"
                                 app:layout_constraintTop_toBottomOf="@+id/tv_shape"
@@ -406,6 +411,7 @@
                                 android:layout_height="wrap_content"
                                 android:autoLink="phone"
                                 android:textSize="14sp"
+                                android:layout_marginStart="2dp"
                                 android:layout_marginTop="5dp"
                                 app:layout_constraintStart_toStartOf="@+id/guideline"
                                 app:layout_constraintTop_toBottomOf="@+id/tv_size"
@@ -427,6 +433,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textSize="14sp"
+                                android:layout_marginStart="2dp"
                                 app:layout_constraintStart_toStartOf="@+id/guideline"
                                 app:layout_constraintTop_toBottomOf="@+id/tv_offer_price"
                                 tools:text="JWTIY" />
@@ -449,6 +456,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textSize="14sp"
+                                android:layout_marginStart="2dp"
                                 android:visibility="visible"
                                 app:layout_constraintStart_toStartOf="@+id/guideline"
                                 app:layout_constraintTop_toBottomOf="@id/tv_door_delivery"
@@ -471,6 +479,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textSize="14sp"
+                                android:layout_marginStart="2dp"
                                 app:layout_constraintStart_toStartOf="@+id/guideline"
                                 app:layout_constraintTop_toBottomOf="@+id/tv_ordered_on"
                                 tools:text="JWTIY" />
@@ -492,6 +501,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textSize="14sp"
+                                android:layout_marginStart="2dp"
                                 app:layout_constraintStart_toStartOf="@+id/guideline"
                                 app:layout_constraintTop_toBottomOf="@+id/tv_order_id"
                                 tools:text="JWTIY" />
@@ -502,7 +512,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textSize="14sp"
-                                android:fontFamily="sans-serif-medium"
+                                android:layout_marginStart="2dp"
                                 app:layout_constraintStart_toStartOf="@+id/guideline"
                                 app:layout_constraintTop_toBottomOf="@+id/tv_order_city"
                                 tools:text="JWTIY" />
@@ -519,6 +529,134 @@
                                 app:layout_constraintStart_toStartOf="@+id/textView2279"
                                 app:layout_constraintTop_toBottomOf="@+id/tv_order_city" />
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="visible"
+                                android:layout_marginTop="5dp"
+                                app:layout_constraintStart_toStartOf="@+id/tv_status"
+                                app:layout_constraintTop_toBottomOf="@id/tv_order_status">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="visible"
+                                    app:layout_constraintTop_toBottomOf="@id/tv_offer_price"
+                                    >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:visibility="visible"
+                                        android:weightSum="10"
+                                        android:layout_marginTop="5dp"
+                                        >
+
+                                        <TextView
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="3"
+                                            android:text="Perimeter"
+                                            android:textColor="@color/black"
+                                            android:textSize="16sp"/>
+
+
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:id="@+id/tv_perimeter"
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="5"
+                                            tools:text="JWTIY"
+                                            android:textSize="14sp"/>
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:visibility="visible"
+                                        android:weightSum="10"
+                                        android:layout_marginTop="5dp"
+                                        >
+
+                                        <TextView
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="3"
+                                            android:text="Length"
+                                            android:textColor="@color/black"
+                                            android:textSize="16sp"/>
+
+
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:id="@+id/tv_length"
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="5"
+                                            tools:text="Perimeter"
+                                            android:textSize="14sp"/>
+
+
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:visibility="visible"
+                                        android:weightSum="10"
+                                        android:layout_marginTop="5dp"
+                                        >
+
+                                        <TextView
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="3"
+                                            android:text="Thickness"
+                                            android:textColor="@color/black"
+                                            android:textSize="16sp"/>
+
+
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:id="@+id/tv_thickness"
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="5"
+                                            tools:text="Perimeter"
+                                                                                        android:textSize="14sp"/>
+
+
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:visibility="visible"
+                                        android:weightSum="10"
+                                        android:layout_marginTop="5dp"
+                                        >
+
+                                        <TextView
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="3"
+                                            android:text="Weight"
+                                            android:textColor="@color/black"
+                                            android:textSize="16sp"/>
+
+
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:id="@+id/tv_weight"
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="5"
+                                            tools:text="Perimeter"
+                                            android:textSize="16sp"/>
+
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </LinearLayout>

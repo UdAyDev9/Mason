@@ -65,6 +65,10 @@ public class AllOrdersAdapter extends RecyclerView.Adapter<AllOrdersAdapter.MyRe
             holder.tv_ordered_on.setText(dataItem.getCREATED_DATETIME());
             holder.tv_door_delivery.setText(dataItem.getDELIVERY_TYPE());
             holder.tv_order_city.setText(dataItem.getCITY());
+            holder.tv_perimeter.setText(dataItem.getPERIMETER());
+            holder.tv_length.setText(dataItem.getLENGTH());
+            holder.tv_thickness.setText(dataItem.getTHICKNESS());
+            holder.tv_weight.setText(dataItem.getwEIGHT());
 
 
             switch (list.get(position).getSTATUS()){
@@ -110,7 +114,7 @@ public class AllOrdersAdapter extends RecyclerView.Adapter<AllOrdersAdapter.MyRe
     public class MyResultsViewHolder extends RecyclerView.ViewHolder {
 
 
-        private TextView tvMaterialType, tvBusinessName, tv_door_delivery, tvOrderId, tvBrandNames, tv_ordered_on, textView7, tv_sub_category, tv_shape, tv_size, tv_mrp, tv_offer_price, tv_pending, tv_quoted, tv_processed, tv_delivered,tv_order_city;
+        private TextView tvMaterialType, tvBusinessName, tv_door_delivery, tvOrderId, tvBrandNames, tv_ordered_on, textView7, tv_sub_category, tv_shape, tv_size, tv_mrp, tv_offer_price, tv_pending, tv_quoted, tv_processed, tv_delivered,tv_order_city,tv_perimeter, tv_length, tv_weight, tv_thickness;
         private Button update_btn;
         private AppCompatTextView txt_totalProductPrice, tvQuantity, plus, minus;
         private LinearLayout moreDetailsLayout, quantityLayout;
@@ -137,6 +141,12 @@ public class AllOrdersAdapter extends RecyclerView.Adapter<AllOrdersAdapter.MyRe
             tv_processed = itemView.findViewById(R.id.tv_processed);
             tv_delivered = itemView.findViewById(R.id.tv_delivered);
             checkbox = (CheckBox) itemView.findViewById(R.id.checkbox);
+            tv_perimeter = itemView.findViewById(R.id.tv_perimeter);
+            tv_length    = itemView.findViewById(R.id.tv_length);
+            tv_weight    = itemView.findViewById(R.id.tv_weight);
+            tv_thickness = itemView.findViewById(R.id.tv_thickness);
+
+
 
             tv_pending.setOnClickListener(new View.OnClickListener() {
                 @Override
