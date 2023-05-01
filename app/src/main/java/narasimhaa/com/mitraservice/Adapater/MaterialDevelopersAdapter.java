@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,6 +55,14 @@ public class MaterialDevelopersAdapter extends RecyclerView.Adapter<MaterialDeve
             holder.tvShape.setText(dataItem.getHEIGHT());
             holder.tvOfferPrice.setText(dataItem.getPRICE());
             holder.tvMrp.setText(dataItem.getMRP());
+            holder.tvMrp.setText(dataItem.getMRP());
+            holder.tvMrp.setText(dataItem.getMRP());
+            holder.tvMrp.setText(dataItem.getMRP());
+            holder.tvMrp.setText(dataItem.getMRP());
+            holder.tv_perimeter.setText(dataItem.getPERIMETER());
+            holder.tv_length.setText(dataItem.getLENGTH());
+            holder.tv_thickness.setText(dataItem.getTHICKNESS());
+            holder.tv_weight.setText(dataItem.getwEIGHT());
 
             if (!dataItem.getSERVICETYPE().equalsIgnoreCase("CEMENT")||!dataItem.getSERVICETYPE().equalsIgnoreCase("PAINTS")){
 
@@ -81,7 +90,7 @@ public class MaterialDevelopersAdapter extends RecyclerView.Adapter<MaterialDeve
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvMaterialType,tvBusinessName,tvBusinessType,tvDoorDelivery,tvBrandNames,tv_brand_names,textView7,tvShape,tvMrp,tvOfferPrice;
+        private TextView tvMaterialType,tvBusinessName,tvBusinessType,tvDoorDelivery,tvBrandNames,tv_brand_names,textView7,tvShape,tvMrp,tvOfferPrice,tv_perimeter, tv_length, tv_weight, tv_thickness;
         private Button update_btn;
 
 
@@ -98,6 +107,12 @@ public class MaterialDevelopersAdapter extends RecyclerView.Adapter<MaterialDeve
             tvMrp = itemView.findViewById(R.id.tv_mrp);
             tvOfferPrice = itemView.findViewById(R.id.tv_offer_price);
             update_btn = itemView.findViewById(R.id.update_btn);
+            tv_perimeter = itemView.findViewById(R.id.tv_perimeter);
+            tv_length    = itemView.findViewById(R.id.tv_length);
+            tv_weight    = itemView.findViewById(R.id.tv_weight);
+            tv_thickness = itemView.findViewById(R.id.tv_thickness);
+
+
 
             update_btn.setOnClickListener(new View.OnClickListener() {
                 @Override

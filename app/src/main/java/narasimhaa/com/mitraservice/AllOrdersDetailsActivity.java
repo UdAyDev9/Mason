@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -61,6 +62,8 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
 
     final Calendar myCalendar = Calendar.getInstance();
 
+    FloatingActionButton fab_filter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +73,12 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
         getSupportActionBar().setTitle("Request Orders");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initViews();
+        fab_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showFilterDialog(view);
+            }
+        });
 
         recyclerView = findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(AllOrdersDetailsActivity.this);
@@ -239,6 +248,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
     }
     private void initViews() {
         ll_status_type = findViewById(R.id.ll_status_type);
+        fab_filter = findViewById(R.id.filter_fab);
         date = findViewById(R.id.date);
         ll_status_type.setText(getResources().getStringArray(R.array.order_status_array)[0]);
         date.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
@@ -282,5 +292,19 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
             e.printStackTrace();
         }
     }
+
+    public void showFilterDialog(View view) {
+        // Create an alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.custom_alert_dialog_search, null);
+        builder.setView(customLayout);
+        //EditText editText = customLayout.findViewById(R.id.editText);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 
 }

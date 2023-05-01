@@ -46,8 +46,18 @@ public class DataItem{
 	@SerializedName("DOOR_DELIVERY")
 	private String dOORDELIVERY;
 
-	@SerializedName("STEEL_SIZE")
+	@SerializedName("WEIGHT")
 	private String wEIGHT;
+
+	@SerializedName("LENGTH")
+	private String LENGTH;
+	@SerializedName("THICKNESS")
+	private String THICKNESS;
+
+	@SerializedName("PERIMETER")
+	private String PERIMETER;
+
+
 
 	private boolean isSelected;
 
@@ -126,5 +136,37 @@ public class DataItem{
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public String getwEIGHT() {
+		return wEIGHT;
+	}
+
+	public void setwEIGHT(String wEIGHT) {
+		this.wEIGHT = wEIGHT;
+	}
+
+	public String getLENGTH() {
+		return LENGTH;
+	}
+
+	public void setLENGTH(String LENGTH) {
+		this.LENGTH = LENGTH;
+	}
+
+	public String getTHICKNESS() {
+		return THICKNESS;
+	}
+
+	public void setTHICKNESS(String THICKNESS) {
+		this.THICKNESS = THICKNESS;
+	}
+
+	public String getPERIMETER() {
+		return PERIMETER;
+	}
+
+	public void setPERIMETER(String PERIMETER) {
+		this.PERIMETER = PERIMETER;
 	}
 }

@@ -7,7 +7,7 @@ public class ServicesDataItemSize {
 	@SerializedName("ID")
 	private String iD;
 
-	@SerializedName(value = "BRAND", alternate = {"SIZE","HEIGHT","BTYPE","SHAPE","SUB_CATEGORY"})
+	@SerializedName(value = "BRAND", alternate = {"SIZE","HEIGHT","BTYPE","SHAPE","SUB_CATEGORY","PERIMETER","THICKNESS","LENGTH","WEIGHT"})
 	private String sERVICETYPE;
 
 	public void setID(String iD){

@@ -97,7 +97,7 @@ public class AddOthersActivity extends AppCompatActivity {
 
                 strThickness = et_thickness.getText().toString();
 
-                addThickness(strWeight);
+                addThickness(strThickness);
             }
 
 

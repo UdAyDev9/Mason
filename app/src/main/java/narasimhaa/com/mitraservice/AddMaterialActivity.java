@@ -65,7 +65,7 @@ public class AddMaterialActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     private EditText etBusinessName, etDoorDelivery, etDescription, etMRP, etPrice, etWidth, etHeight, etBrandName;
     private TextView tvPersoalCert, tvCertiCamera;
-    private String strBusinessName = "", strShapeType = "", strMaterialType = "", strMaterialTypeBrand = "",strMaterialTypeSize = "", strDoorDelivery = "", strDescription = "", strMRP = "", strPrice = "", strWidth = "", strSubCategory = "", strBrandName = "";
+    private String strBusinessName = "", strShapeType = "", strMaterialType = "", strMaterialTypeBrand = "", strMaterialTypeSize = "", strDoorDelivery = "", strDescription = "", strMRP = "", strPrice = "", strWidth = "", strSubCategory = "", strBrandName = "", strPerimeter = "", strLength = "", strWeight = "", strThickness = "";
     private ImageView imgCierti;
     String name = "";
     String mail = "";
@@ -78,9 +78,14 @@ public class AddMaterialActivity extends AppCompatActivity {
     String district = "";
     String pincode = "";
     List<ServicesDataItem> dataList = new ArrayList<>();
-     List<ServicesDataItemSize> dataListSizeBrand = new ArrayList<>();
-     List<ServicesDataItemSize> dataListShapes = new ArrayList<>();
-     List<ServicesDataItemSize> dataListSubCategory = new ArrayList<>();
+    List<ServicesDataItemSize> dataListSizeBrand = new ArrayList<>();
+    List<ServicesDataItemSize> dataListShapes = new ArrayList<>();
+    List<ServicesDataItemSize> dataListSubCategory = new ArrayList<>();
+
+    List<ServicesDataItemSize> dataListThickness = new ArrayList<>();
+    List<ServicesDataItemSize> dataListPerimeters = new ArrayList<>();
+    List<ServicesDataItemSize> dataListLengths = new ArrayList<>();
+    List<ServicesDataItemSize> dataListWeights = new ArrayList<>();
     List<ServicesDataItemSize> dataListSizeBrandOnly = new ArrayList<>();
 
     List<String> servicesStringList = new ArrayList<>();
@@ -92,8 +97,8 @@ public class AddMaterialActivity extends AppCompatActivity {
 
 
     private boolean isFromUpdate = false;
-    private Spinner spinnerShapeType, spinnerMaterialType, spinnerBrands, spinnerMaterialSize,spinner_sub_category,spinner_material_shape;
-    private String ID =" ";
+    private Spinner spinnerShapeType, spinnerMaterialType, spinnerBrands, spinnerMaterialSize, spinner_sub_category, spinner_material_shape, spinner_perimeter, spinner_length, spinner_thickness, spinner_weight;
+    private String ID = " ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,17 +106,24 @@ public class AddMaterialActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_material);
 
         //multiSpinner = (MultiSpinner) findViewById(R.id.spinnerMultiSpinner);
-        spinner_sub_category =(Spinner) findViewById(R.id.spinner_sub_category);
+        spinner_sub_category = (Spinner) findViewById(R.id.spinner_sub_category);
         //spinner_material_shape =(Spinner)findViewById(R.id.spinner_material_shape);
         spinnerMaterialType = (Spinner) findViewById(R.id.material_types);
         spinnerBrands = (Spinner) findViewById(R.id.spinner_material_brand);
         spinnerMaterialSize = (Spinner) findViewById(R.id.spinner_material_size);
+        spinner_perimeter = (Spinner) findViewById(R.id.spinner_perimeter);
+        spinner_length = (Spinner) findViewById(R.id.spinner_length);
+        spinner_thickness = (Spinner) findViewById(R.id.spinner_thickness);
+        spinner_weight = (Spinner) findViewById(R.id.spinner_weight);
         getData(getIntent().getBooleanExtra(MyUtilities.IS_DEVELOPER, false));
         getBrandsData(getIntent().getBooleanExtra(MyUtilities.IS_DEVELOPER, false));
         getBrandsSizeData(getIntent().getBooleanExtra(MyUtilities.IS_DEVELOPER, false));
         getShapes(getIntent().getBooleanExtra(MyUtilities.IS_DEVELOPER, false));
         getSubCategories(getIntent().getBooleanExtra(MyUtilities.IS_DEVELOPER, false));
-
+        getThickness();
+        getPerimeters();
+        getLenghts();
+        getWeights();
         btnSubmit = (Button) findViewById(R.id.bt_submit);
         etBusinessName = (EditText) findViewById(R.id.et_business_name);
         etPrice = (EditText) findViewById(R.id.et_price);
@@ -137,18 +149,18 @@ public class AddMaterialActivity extends AppCompatActivity {
 
                 if (getIntent().getExtras().getString("material_update_yes_or_no").equals("yes")) {
 
-                    Log.i(TAG, "onCreate: "+getIntent().getExtras().getString(MyUtilities.INTENT_KEY_MATERIAL_TYPE));
-                    Log.i(TAG, "onCreate: "+getIntent().getExtras().getString(MyUtilities.INTENT_KEY_BUSINESS_TYPE));
-                   etBusinessName.setText(getIntent().getExtras().getString(MyUtilities.INTENT_KEY_BUSINESS_NAME));
-                   etDescription.setText(getIntent().getExtras().getString(MyUtilities.INTENT_KEY_DESC));
-                   etDoorDelivery.setText(getIntent().getExtras().getString(MyUtilities.INTENT_KEY_DOOR_DELIVERY));
-                   etPrice.setText(getIntent().getExtras().getString(MyUtilities.INTENT_KEY_OFFER_PRICE));
-                   etMRP.setText(getIntent().getExtras().getString(MyUtilities.INTENT_KEY_PRICE));
-                   etDoorDelivery.setText(getIntent().getExtras().getString(MyUtilities.INTENT_KEY_DOOR_DELIVERY));
+                    Log.i(TAG, "onCreate: " + getIntent().getExtras().getString(MyUtilities.INTENT_KEY_MATERIAL_TYPE));
+                    Log.i(TAG, "onCreate: " + getIntent().getExtras().getString(MyUtilities.INTENT_KEY_BUSINESS_TYPE));
+                    etBusinessName.setText(getIntent().getExtras().getString(MyUtilities.INTENT_KEY_BUSINESS_NAME));
+                    etDescription.setText(getIntent().getExtras().getString(MyUtilities.INTENT_KEY_DESC));
+                    etDoorDelivery.setText(getIntent().getExtras().getString(MyUtilities.INTENT_KEY_DOOR_DELIVERY));
+                    etPrice.setText(getIntent().getExtras().getString(MyUtilities.INTENT_KEY_OFFER_PRICE));
+                    etMRP.setText(getIntent().getExtras().getString(MyUtilities.INTENT_KEY_PRICE));
+                    etDoorDelivery.setText(getIntent().getExtras().getString(MyUtilities.INTENT_KEY_DOOR_DELIVERY));
                     ID = getIntent().getExtras().getString(MyUtilities.INTENT_KEY_ID);
-                    Log.i(TAG, "onCreate: "+getIntent().getExtras().getString(MyUtilities.INTENT_KEY_DOOR_DELIVERY));
-                    Log.i(TAG, "onCreate: "+getIntent().getExtras().getString(MyUtilities.INTENT_KEY_DESC));
-                    Log.i(TAG, "onCreate: "+getIntent().getExtras().getString(MyUtilities.INTENT_KEY_BRAND_NAME));
+                    Log.i(TAG, "onCreate: " + getIntent().getExtras().getString(MyUtilities.INTENT_KEY_DOOR_DELIVERY));
+                    Log.i(TAG, "onCreate: " + getIntent().getExtras().getString(MyUtilities.INTENT_KEY_DESC));
+                    Log.i(TAG, "onCreate: " + getIntent().getExtras().getString(MyUtilities.INTENT_KEY_BRAND_NAME));
 
                     getSupportActionBar().setTitle(R.string.title_material_update);
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -156,7 +168,7 @@ public class AddMaterialActivity extends AppCompatActivity {
                     isFromUpdate = true;
                 }
             }
-        }else {
+        } else {
 
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle(R.string.title_add_material);
@@ -216,7 +228,6 @@ public class AddMaterialActivity extends AppCompatActivity {
                 strMaterialTypeBrand = dataListSizeBrandOnly.get(i).getSERVICE_NAME();
 
 
-
             }
 
             @Override
@@ -239,6 +250,61 @@ public class AddMaterialActivity extends AppCompatActivity {
             }
         });
 
+        spinner_perimeter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                strPerimeter = dataListPerimeters.get(i).getSERVICE_NAME();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinner_length.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                strLength = dataListLengths.get(i).getSERVICE_NAME();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinner_thickness.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                strThickness = dataListThickness.get(i).getSERVICE_NAME();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinner_weight.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                strWeight = dataListWeights.get(i).getSERVICE_NAME();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
         spinnerMaterialSize.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -246,7 +312,6 @@ public class AddMaterialActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 strMaterialTypeSize = dataListSizeBrand.get(i).getSERVICE_NAME();
-
 
 
             }
@@ -268,7 +333,6 @@ public class AddMaterialActivity extends AppCompatActivity {
                 }*/
 
                 strShapeType = adapterView.getItemAtPosition(i).toString();
-
 
 
             }
@@ -413,18 +477,9 @@ public class AddMaterialActivity extends AppCompatActivity {
     private void send_data_to_server() {
 
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .build();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS).writeTimeout(60, TimeUnit.SECONDS).connectTimeout(60, TimeUnit.SECONDS).build();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .client(okHttpClient)
-                .baseUrl(ApiInterface.URL_BASE)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        Retrofit retrofit = new Retrofit.Builder().client(okHttpClient).baseUrl(ApiInterface.URL_BASE).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create()).build();
         MyUtilities.showAlertDialog(AddMaterialActivity.this, KAlertDialog.PROGRESS_TYPE, "Loading...");
 
 
@@ -553,18 +608,9 @@ public class AddMaterialActivity extends AppCompatActivity {
     public void getData_() {
 
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .build();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS).writeTimeout(60, TimeUnit.SECONDS).connectTimeout(60, TimeUnit.SECONDS).build();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .client(okHttpClient)
-                .baseUrl(ApiInterface.URL_BASE)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        Retrofit retrofit = new Retrofit.Builder().client(okHttpClient).baseUrl(ApiInterface.URL_BASE).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create()).build();
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
@@ -634,16 +680,9 @@ public class AddMaterialActivity extends AppCompatActivity {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
+        Gson gson = new GsonBuilder().setLenient().create();
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.URL_BASE)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(client)
-                .build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(ApiInterface.URL_BASE).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create(gson)).client(client).build();
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
@@ -688,8 +727,7 @@ public class AddMaterialActivity extends AppCompatActivity {
                         }
 
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMaterialActivity.this,
-                                android.R.layout.simple_spinner_item, tempList);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMaterialActivity.this, android.R.layout.simple_spinner_item, tempList);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                         spinnerMaterialType.setAdapter(adapter);
@@ -728,16 +766,9 @@ public class AddMaterialActivity extends AppCompatActivity {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
+        Gson gson = new GsonBuilder().setLenient().create();
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.URL_BASE)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(client)
-                .build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(ApiInterface.URL_BASE).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create(gson)).client(client).build();
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
@@ -778,8 +809,7 @@ public class AddMaterialActivity extends AppCompatActivity {
                         }
 
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMaterialActivity.this,
-                                android.R.layout.simple_spinner_item, tempList);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMaterialActivity.this, android.R.layout.simple_spinner_item, tempList);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                         spinnerBrands.setAdapter(adapter);
@@ -815,16 +845,9 @@ public class AddMaterialActivity extends AppCompatActivity {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
+        Gson gson = new GsonBuilder().setLenient().create();
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.URL_BASE)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(client)
-                .build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(ApiInterface.URL_BASE).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create(gson)).client(client).build();
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
@@ -866,8 +889,7 @@ public class AddMaterialActivity extends AppCompatActivity {
                         }
 
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMaterialActivity.this,
-                                android.R.layout.simple_spinner_item, tempList);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMaterialActivity.this, android.R.layout.simple_spinner_item, tempList);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                         spinnerMaterialSize.setAdapter(adapter);
@@ -907,17 +929,10 @@ public class AddMaterialActivity extends AppCompatActivity {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
+        Gson gson = new GsonBuilder().setLenient().create();
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.URL_BASE)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(client)
-                .build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(ApiInterface.URL_BASE).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create(gson)).client(client).build();
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
@@ -939,6 +954,10 @@ public class AddMaterialActivity extends AppCompatActivity {
             jsonReg.addProperty("STEEL_SHAPE", strShapeType);
             jsonReg.addProperty("MRP", strMRP);
             jsonReg.addProperty("PRICE", strPrice);
+            jsonReg.addProperty("PERIMETER", strPerimeter);
+            jsonReg.addProperty("LENGTH", strLength);
+            jsonReg.addProperty("THICKNESS", strThickness);
+            jsonReg.addProperty("WEIGHT", strWeight);
             Call<ServerResponse> userCall;
 
             if (isFromUpdate == true) {
@@ -965,11 +984,11 @@ public class AddMaterialActivity extends AppCompatActivity {
 
                             //SharedPreferenceUtils.setValue(AddMaterialActivity.this, MyUtilities.PREF_SER_PER_SEQ_ID, response.body().getData().getSER_PER_SEQ_ID());
 
-                            if(isFromUpdate){
+                            if (isFromUpdate) {
 
                                 MyUtilities.showToast(AddMaterialActivity.this, "Material updated successfully!!!");
 
-                            }else {
+                            } else {
 
                                 MyUtilities.showToast(AddMaterialActivity.this, "Material added successfully!!!");
 
@@ -1017,16 +1036,9 @@ public class AddMaterialActivity extends AppCompatActivity {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
+        Gson gson = new GsonBuilder().setLenient().create();
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.URL_BASE)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(client)
-                .build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(ApiInterface.URL_BASE).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create(gson)).client(client).build();
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
@@ -1056,7 +1068,7 @@ public class AddMaterialActivity extends AppCompatActivity {
                         MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
 
 
-                        dataListShapes= response.body().getData();
+                        dataListShapes = response.body().getData();
 
                         List<String> tempList = new ArrayList<>();
 
@@ -1068,8 +1080,7 @@ public class AddMaterialActivity extends AppCompatActivity {
                         }
 
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMaterialActivity.this,
-                                android.R.layout.simple_spinner_item, tempList);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMaterialActivity.this, android.R.layout.simple_spinner_item, tempList);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                         spinnerShapeType.setAdapter(adapter);
@@ -1105,16 +1116,9 @@ public class AddMaterialActivity extends AppCompatActivity {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
+        Gson gson = new GsonBuilder().setLenient().create();
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.URL_BASE)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(client)
-                .build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(ApiInterface.URL_BASE).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create(gson)).client(client).build();
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
@@ -1144,7 +1148,7 @@ public class AddMaterialActivity extends AppCompatActivity {
                         MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
 
 
-                        dataListSubCategory= response.body().getData();
+                        dataListSubCategory = response.body().getData();
 
                         List<String> tempList = new ArrayList<>();
 
@@ -1156,8 +1160,7 @@ public class AddMaterialActivity extends AppCompatActivity {
                         }
 
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMaterialActivity.this,
-                                android.R.layout.simple_spinner_item, tempList);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMaterialActivity.this, android.R.layout.simple_spinner_item, tempList);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                         spinner_sub_category.setAdapter(adapter);
@@ -1189,5 +1192,288 @@ public class AddMaterialActivity extends AppCompatActivity {
         });
     }
 
+    public void getThickness() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        Gson gson = new GsonBuilder().setLenient().create();
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(ApiInterface.URL_BASE).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create(gson)).client(client).build();
+
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+
+
+        JsonObject paramObject = new JsonObject();
+        paramObject.addProperty("BOD_SEQ_NO", SharedPreferenceUtils.getValue(AddMaterialActivity.this, MyUtilities.PREF_BOD_SEQ_NO));
+
+        Call<ServicesResponseSizeBrand> userCall;
+
+        userCall = apiInterface.getThickness();
+        userCall.enqueue(new Callback<ServicesResponseSizeBrand>() {
+            @Override
+            public void onResponse(Call<ServicesResponseSizeBrand> call, Response<ServicesResponseSizeBrand> response) {
+
+
+                if (response.body() != null) {
+
+                    if (response.body().getStatus() == true) {
+
+                        MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+
+
+                        dataListThickness = response.body().getData();
+
+                        List<String> tempList = new ArrayList<>();
+
+                        for (int i = 0; i < dataListThickness.size(); i++) {
+
+                            tempList.add(dataListThickness.get(i).getSERVICE_NAME());
+
+
+                        }
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMaterialActivity.this, android.R.layout.simple_spinner_item, tempList);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                        spinner_thickness.setAdapter(adapter);
+
+                    } else {
+                        MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+
+                        MyUtilities.showToast(AddMaterialActivity.this, MyUtilities.KAlertDialogTitleError);
+                    }
+
+                } else {
+
+                    MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+                    MyUtilities.showToast(AddMaterialActivity.this, MyUtilities.KAlertDialogTitleError);
+
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<ServicesResponseSizeBrand> call, Throwable t) {
+
+                Log.e("erro", "onFailure: " + t.getMessage());
+                MyUtilities.showToast(AddMaterialActivity.this, MyUtilities.KAlertDialogTitleError);
+                MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+
+            }
+        });
+    }
+
+    public void getPerimeters() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        Gson gson = new GsonBuilder().setLenient().create();
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(ApiInterface.URL_BASE).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create(gson)).client(client).build();
+
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+
+
+        JsonObject paramObject = new JsonObject();
+        paramObject.addProperty("BOD_SEQ_NO", SharedPreferenceUtils.getValue(AddMaterialActivity.this, MyUtilities.PREF_BOD_SEQ_NO));
+
+        Call<ServicesResponseSizeBrand> userCall;
+
+        userCall = apiInterface.getPerimeters();
+        userCall.enqueue(new Callback<ServicesResponseSizeBrand>() {
+            @Override
+            public void onResponse(Call<ServicesResponseSizeBrand> call, Response<ServicesResponseSizeBrand> response) {
+
+
+                if (response.body() != null) {
+
+                    if (response.body().getStatus() == true) {
+
+                        MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+
+
+                        dataListPerimeters = response.body().getData();
+
+                        List<String> tempList = new ArrayList<>();
+
+                        for (int i = 0; i < dataListPerimeters.size(); i++) {
+
+                            tempList.add(dataListPerimeters.get(i).getSERVICE_NAME());
+
+
+                        }
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMaterialActivity.this, android.R.layout.simple_spinner_item, tempList);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                        spinner_perimeter.setAdapter(adapter);
+
+                    } else {
+                        MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+
+                        MyUtilities.showToast(AddMaterialActivity.this, MyUtilities.KAlertDialogTitleError);
+                    }
+
+                } else {
+
+                    MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+                    MyUtilities.showToast(AddMaterialActivity.this, MyUtilities.KAlertDialogTitleError);
+
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<ServicesResponseSizeBrand> call, Throwable t) {
+
+                Log.e("erro", "onFailure: " + t.getMessage());
+                MyUtilities.showToast(AddMaterialActivity.this, MyUtilities.KAlertDialogTitleError);
+                MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+
+            }
+        });
+    }
+
+    public void getLenghts() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        Gson gson = new GsonBuilder().setLenient().create();
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(ApiInterface.URL_BASE).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create(gson)).client(client).build();
+
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+
+
+        JsonObject paramObject = new JsonObject();
+        paramObject.addProperty("BOD_SEQ_NO", SharedPreferenceUtils.getValue(AddMaterialActivity.this, MyUtilities.PREF_BOD_SEQ_NO));
+
+        Call<ServicesResponseSizeBrand> userCall;
+
+        userCall = apiInterface.getLengths();
+        userCall.enqueue(new Callback<ServicesResponseSizeBrand>() {
+            @Override
+            public void onResponse(Call<ServicesResponseSizeBrand> call, Response<ServicesResponseSizeBrand> response) {
+
+
+                if (response.body() != null) {
+
+                    if (response.body().getStatus() == true) {
+
+                        MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+
+
+                        dataListLengths = response.body().getData();
+
+                        List<String> tempList = new ArrayList<>();
+
+                        for (int i = 0; i < dataListLengths.size(); i++) {
+
+                            tempList.add(dataListLengths.get(i).getSERVICE_NAME());
+
+
+                        }
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMaterialActivity.this, android.R.layout.simple_spinner_item, tempList);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                        spinner_length.setAdapter(adapter);
+
+                    } else {
+                        MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+
+                        MyUtilities.showToast(AddMaterialActivity.this, MyUtilities.KAlertDialogTitleError);
+                    }
+
+                } else {
+
+                    MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+                    MyUtilities.showToast(AddMaterialActivity.this, MyUtilities.KAlertDialogTitleError);
+
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<ServicesResponseSizeBrand> call, Throwable t) {
+
+                Log.e("erro", "onFailure: " + t.getMessage());
+                MyUtilities.showToast(AddMaterialActivity.this, MyUtilities.KAlertDialogTitleError);
+                MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+
+            }
+        });
+    }
+
+    public void getWeights() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        Gson gson = new GsonBuilder().setLenient().create();
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(ApiInterface.URL_BASE).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create(gson)).client(client).build();
+
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+
+
+        JsonObject paramObject = new JsonObject();
+        paramObject.addProperty("BOD_SEQ_NO", SharedPreferenceUtils.getValue(AddMaterialActivity.this, MyUtilities.PREF_BOD_SEQ_NO));
+
+        Call<ServicesResponseSizeBrand> userCall;
+
+        userCall = apiInterface.getWeights();
+        userCall.enqueue(new Callback<ServicesResponseSizeBrand>() {
+            @Override
+            public void onResponse(Call<ServicesResponseSizeBrand> call, Response<ServicesResponseSizeBrand> response) {
+
+
+                if (response.body() != null) {
+
+                    if (response.body().getStatus() == true) {
+
+                        MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+
+
+                        dataListWeights = response.body().getData();
+
+                        List<String> tempList = new ArrayList<>();
+
+                        for (int i = 0; i < dataListWeights.size(); i++) {
+
+                            tempList.add(dataListWeights.get(i).getSERVICE_NAME());
+
+
+                        }
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMaterialActivity.this, android.R.layout.simple_spinner_item, tempList);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                        spinner_weight.setAdapter(adapter);
+
+                    } else {
+                        MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+
+                        MyUtilities.showToast(AddMaterialActivity.this, MyUtilities.KAlertDialogTitleError);
+                    }
+
+                } else {
+
+                    MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+                    MyUtilities.showToast(AddMaterialActivity.this, MyUtilities.KAlertDialogTitleError);
+
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<ServicesResponseSizeBrand> call, Throwable t) {
+
+                Log.e("erro", "onFailure: " + t.getMessage());
+                MyUtilities.showToast(AddMaterialActivity.this, MyUtilities.KAlertDialogTitleError);
+                MyUtilities.cancelAlertDialog(AddMaterialActivity.this);
+
+            }
+        });
+    }
 
 }
