@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <TextView
+                        android:id="@+id/txt_offer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Update"
+                        android:textColor="@color/colorPrimary" />
+
+                    <RelativeLayout
+                        android:layout_width="100dp"
+                        android:layout_height="150dp"
+                        android:background="@color/white"
+                        android:padding="5dp">
+
+
+
+                        <ImageView
+                            android:id="@+id/img_product"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp" />
+
+                        <TextView
+                            android:id="@+id/totalProductPrice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/img_product"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/yellow"
+                            android:gravity="center"
+                            android:text="Price :"
+                            android:textColor="@color/white" />
+
+                        <LinearLayout
+                            android:id="@+id/quantity_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/totalProductPrice"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/minus"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_baseline_minimize_24" />
+
+                            <TextView
+                                android:id="@+id/count"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:id="@+id/plus"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_baseline_plus_one_24" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/view_manufacture"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Business Name"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/txt_compName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/view_manufacture"
+                                android:text="Hello"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="16sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_below="@id/txt_compName"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@color/colorPrimary" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Product Name "
+                                android:textColor="@color/black" />
+                            <TextView
+                                android:id="@+id/colon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" : "
+                                android:layout_marginLeft="115dp"/>
+                            <TextView
+                                android:id="@+id/txt_prodType"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignLeft="@id/colon"
+                                android:paddingLeft="15dp"
+                                android:text="Hello"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Product Name "
+                                android:textColor="@color/black" />
+                            <TextView
+                                android:id="@+id/colon1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" : "
+                                android:layout_marginLeft="115dp"/>
+
+                            <TextView
+                                android:id="@+id/txt_prodName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignLeft="@id/colon1"
+                                android:paddingLeft="15dp"
+                                android:text="Hello"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Sku Id"
+                                android:textColor="@color/black" />
+                            <TextView
+                                android:id="@+id/colon2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" : "
+                                android:layout_marginLeft="115dp"/>
+
+                            <TextView
+                                android:id="@+id/txt_skuId"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignLeft="@id/colon2"
+                                android:paddingLeft="15dp"
+                                android:text="Hello"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Discount"
+                                android:textColor="@color/black" />
+                            <TextView
+                                android:id="@+id/colon8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" : "
+                                android:layout_marginLeft="115dp"/>
+
+                            <TextView
+                                android:id="@+id/txt_discount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignLeft="@id/colon8"
+                                android:paddingLeft="15dp"
+                                android:text="Hello"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Price"
+                                android:textColor="@color/black" />
+                            <TextView
+                                android:id="@+id/colon9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" : "
+                                android:layout_marginLeft="115dp"/>
+
+                            <TextView
+                                android:id="@+id/txt_finalPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignLeft="@id/colon9"
+                                android:paddingLeft="15dp"
+                                android:text="Hello"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"/>
+
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent" />
+
+            <LinearLayout
+                android:id="@+id/bottom_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+
+
+
+
+
+
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</RelativeLayout>
+
+

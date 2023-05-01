@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <item
+        android:id="@+id/action_yes"
+        android:icon="@drawable/ic_action_navigation_arrow_back"
+        android:orderInCategory="100"
+        android:title="Material supplier"
+        app:showAsAction="collapseActionView"/>
+    <item
+        android:id="@+id/action_no1"
+        android:icon="@drawable/ic_action_navigation_arrow_back"
+        android:orderInCategory="200"
+        android:title="Service Personnel"
+        app:showAsAction="collapseActionView"/>
+
+
+    <item
+        android:id="@+id/action_yes1"
+        android:icon="@drawable/ic_action_navigation_arrow_back"
+        android:orderInCategory="100"
+        android:title="Developer"
+        app:showAsAction="collapseActionView"/>
+    <item
+        android:id="@+id/action_no"
+        android:icon="@drawable/ic_action_navigation_arrow_back"
+        android:orderInCategory="200"
+        android:title="Individual"
+        app:showAsAction="collapseActionView"/>
+
+
+
+
+</menu>

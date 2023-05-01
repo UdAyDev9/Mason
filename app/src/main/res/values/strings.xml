@@ -1,0 +1,125 @@
+<resources>
+    <string name="app_name">MrMason</string>
+    <string name="title_activity_dash_board">DashBoardActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Available</string>
+    <string name="action_settings1">UnAvailable</string>
+    <string name="powered_by_kosuri_soft_labs"><![CDATA[<string name=\"powerePowered By Kosuri Soft Labs]]></string>
+    <string name="login_using_t_app_folio">Login Using T App Folio</string>
+    <string name="activate_your_login">Do not have account? Create New</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="language">Language/</string>
+    <string name="title_AddnewMyservice">Add new My Service</string>
+    <string name="title_AddMyservice">Add Service</string>
+    <string name="title_update_Myservice">Update Service</string>
+    <string name="title_add_material">Add Product</string>
+    <string name="title_add_shape">Add Shape</string>
+    <string name="title_add_sub_category">Add SubCategory</string>
+    <string name="title_add_perimeter">Add Perimeter</string>
+    <string name="title_add_length">Add Length</string>
+    <string name="title_add_weight">Add Weight</string>
+    <string name="title_add_perimeter_length_weight">Add Perimeter,Length,Weight</string>
+    <string name="title_add_others">Add Others</string>
+    <string name="title_ServiceUpdate">Update Service</string>
+    <string name="title_material_update">Update Product</string>
+    <string name="title_UpdateProfile">My Profile</string>
+    <string name="title_Registration">Registration</string>
+    <string name="are_you_sure_available">Are you sure Available</string>
+    <string name="district">District</string>
+
+    <string-array name="state_array">
+        <item>Select State</item>
+        <item>AndhraPradesh</item>
+        <item>Telangana</item>
+
+    </string-array>
+
+    <string-array name="business_types_array">
+        <item>Wholesale</item>
+        <item>Dealer</item>
+        <item>Retail</item>
+    </string-array>
+
+
+    <string-array name="ts_city_array">
+        <item>Adilabad</item>
+        <item>Bhadradri Kothagudem</item>
+        <item>Hyderabad</item>
+        <item>Jagtial</item>
+        <item>Jangaon</item>
+        <item>Jayashankar Bhupalpally</item>
+        <item>Jogulamba Gadwal</item>
+        <item>Kamareddy</item>
+        <item>Karimnagar</item>
+        <item>Khammam</item>
+        <item>Kumuram Bheem</item>
+        <item>Mahabubabad</item>
+        <item>Mahabubnagar</item>
+        <item>Mancherial</item>
+        <item>Medak</item>
+        <item>Medchal</item>
+        <item>Mulugu</item>
+        <item>Nagarkurnool</item>
+        <item>Nalgonda</item>
+        <item>Narayanpet</item>
+        <item>Nirmal</item>
+        <item>Nizamabad</item>
+        <item>Peddapalli</item>
+        <item>Rajanna Sircilla</item>
+        <item>Rangareddy</item>
+        <item>Sangareddy</item>
+        <item>Siddipet</item>
+        <item>Suryapet</item>
+        <item>Vikarabad</item>
+        <item>Wanaparthy</item>
+        <item>Warangal (Rural)</item>
+        <item>Warangal (Urban)</item>
+        <item>Yadadri Bhuvanagiri</item>
+    </string-array>
+
+    <string-array name="ap_city_array">
+        <item>Anantapur</item>
+        <item>Chittoor</item>
+        <item>Cuddapah</item>
+        <item>East Godavari</item>
+        <item>Guntur</item>
+        <item>Kakinada</item>
+        <item>Krishna</item>
+        <item>Kurnool</item>
+        <item>Prakasam</item>
+        <item>Nellore</item>
+        <item>Srikakulam</item>
+        <item>Vishakhapatnam</item>
+
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="Rs">\u20B9</string>
+
+    <!--
+    L Shape,C Shape and Hollow Square and Hollow Round
+    -->
+
+    <string-array name="user_types_array">
+        <item>Dealer</item>
+        <item>Retailer</item>
+<!--
+        <item>Material Supplier</item>
+-->
+    </string-array>
+
+    <string-array name="order_status_array">
+        <item>ORDER_STATUS_PENDING</item>
+        <item>ORDER_STATUS_QUOTED</item>
+        <item>ORDER_STATUS_PROCESSED</item>
+        <item>ORDER_STATUS_DELIVERED</item>
+        <!--
+                <item>Material Supplier</item>
+        -->
+    </string-array>
+
+</resources>

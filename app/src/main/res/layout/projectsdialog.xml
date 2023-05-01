@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_gradient_white"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/master_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/subjectLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="1dp" >
+
+            <TextView
+                android:id="@+id/projects_header"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/header_bg"
+                android:gravity="center"
+                android:text="Select"
+                android:textColor="#545454"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/search_lay"
+                android:layout_width="fill_parent"
+                android:layout_height="42dp"
+                android:layout_below="@+id/search_header"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="1dp" >
+
+                <EditText
+                    android:id="@+id/projects_search"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="4"
+                    android:background="@drawable/edt_selector"
+                    android:cursorVisible="true"
+                    android:hint="search"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="4dp"
+                    android:textColor="#545454"
+                    android:textCursorDrawable="@null" >
+                </EditText>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/list_footer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:id="@+id/noOfRecords"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="0/0 Records"
+                    android:textColor="#000"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical"
+                    android:padding="7dp"
+                    android:weightSum="2" >
+
+                    <ListView
+                        android:id="@+id/projects_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="0dp"
+                        android:layout_weight="2"
+                        android:divider="#C0C0C0"
+                        android:dividerHeight="1dp"
+                        android:fastScrollEnabled="true"
+                        android:visibility="visible" >
+                    </ListView>
+
+                    <TextView
+                        android:id="@+id/searchEmpty"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="No records to display"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="#cc00"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/projects_close"
+                        style="@style/btn_label_n_light_grey"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:text="SUBMIT"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

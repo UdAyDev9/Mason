@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="false"
+    android:orientation="horizontal" >
+
+    <CheckBox
+        android:id="@+id/ui_CB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:button="@drawable/check_box_selector"
+        android:text="Left"
+        android:textColor="#545454" />
+
+</LinearLayout>

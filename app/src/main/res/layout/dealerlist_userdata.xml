@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/parentView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="9dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        >
+
+
+                <LinearLayout
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
+                        android:layout_height="130dp"
+                        android:layout_margin="5dp"
+                        android:background="@color/white"
+                        android:visibility="gone">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:padding="5dp"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/no_image_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:gravity="center"
+                                android:text="No Image Available"
+                                android:textColor="@color/black" />
+
+                            <ImageView
+                                android:id="@+id/image"
+                                android:layout_width="100dp"
+                                android:layout_height="130dp"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                >
+
+                                <LinearLayout
+                                    android:id="@+id/textView4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="10">
+
+                                    <TextView
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="4"
+                                        android:paddingLeft="5dp"
+                                        android:text="Business Name" />
+
+                                    <TextView
+                                        style="@style/TextViewStyle"
+                                        android:layout_gravity="center"
+                                        android:layout_weight="0.2"
+                                        android:text=":" />
+
+                                    <TextView
+                                        android:id="@+id/tv_business_name"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="5.8"
+                                        android:inputType="textNoSuggestions|textMultiLine"
+                                        android:paddingLeft="5dp"
+                                        android:textSize="10dp"
+                                        android:textAllCaps="true"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="10">
+
+                                    <TextView
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="4"
+                                        android:paddingLeft="5dp"
+                                        android:text="BusinessownerNmae" />
+
+                                    <TextView
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="0.2"
+                                        android:text=":" />
+
+                                    <TextView
+                                        android:id="@+id/uname"
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="5.8"
+                                        android:paddingLeft="5dp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="10">
+
+                                    <TextView
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="4"
+                                        android:paddingLeft="5dp"
+                                        android:text="Mobile No" />
+
+                                    <TextView
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="0.2"
+                                        android:text=":" />
+
+                                    <TextView
+                                        android:id="@+id/textView222"
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="5.8"
+                                        android:autoLink="phone"
+                                        android:linksClickable="true"
+                                        android:paddingLeft="5dp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/guideline"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="10">
+
+                                    <TextView
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="4"
+                                        android:paddingLeft="5dp"
+                                        android:text="Product Name" />
+
+                                    <TextView
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="0.2"
+                                        android:text=":" />
+
+                                    <TextView
+                                        android:id="@+id/tv_material_type"
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="5.8"
+                                        android:paddingLeft="5dp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone"
+                                    android:weightSum="10">
+
+                                    <TextView
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="4"
+                                        android:paddingLeft="5dp"
+                                        android:text="Sub category" />
+
+                                    <TextView
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="0.2"
+                                        android:text=":" />
+
+                                    <TextView
+                                        android:id="@+id/tv_subcatery"
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="5.8"
+                                        android:paddingLeft="5dp" />
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="10">
+
+                                    <TextView
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="4"
+                                        android:paddingLeft="5dp"
+                                        android:text="Brand" />
+
+                                    <TextView
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="0.2"
+                                        android:text=":" />
+
+                                    <TextView
+                                        android:id="@+id/tv_brand_names"
+                                        style="@style/TextViewStyle"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="5.8"
+                                        android:paddingLeft="5dp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/lytUserType"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="visible">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="10">
+
+                                        <TextView
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="4"
+                                            android:paddingLeft="5dp"
+                                            android:text="Shape" />
+
+                                        <TextView
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="0.2"
+                                            android:text=":" />
+
+                                        <TextView
+                                            android:id="@+id/spinner_shape"
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="5.8"
+                                            android:paddingLeft="5dp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="10">
+
+                                        <TextView
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="4"
+                                            android:paddingLeft="5dp"
+                                            android:text="Email Id " />
+
+                                        <TextView
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="0.2"
+                                            android:text=":" />
+
+                                        <TextView
+                                            android:id="@+id/tv_email"
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="5.8"
+                                            android:paddingLeft="5dp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/tv_more_box"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+
+                                        android:weightSum="10">
+
+                                        <TextView
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="4"
+                                            android:paddingLeft="5dp"
+                                            android:text="Door Delivery" />
+
+                                        <TextView
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="0.2"
+                                            android:text=":" />
+
+                                        <TextView
+                                            android:id="@+id/tv_door_delivery"
+                                            style="@style/TextViewStyle"
+                                            android:layout_weight="4"
+                                            android:paddingLeft="5dp" />
+
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/tv_more_"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+
+                                    android:weightSum="10">
+
+                                    <TextView
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="4"
+                                        android:paddingLeft="5dp"
+                                        android:text="City" />
+
+                                    <TextView
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="0.2"
+                                        android:text=":" />
+
+                                    <TextView
+                                        android:id="@+id/City"
+                                        style="@style/TextViewStyle"
+                                        android:layout_weight="5"
+                                        android:paddingLeft="5dp" />
+
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/tv_more_ref"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <TextView
+                            style="@style/TextViewStyle"
+                            android:layout_weight="4"
+                            android:paddingLeft="5dp"
+                            android:text="Address" />
+
+                        <TextView
+                            style="@style/TextViewStyle"
+                            android:layout_weight="0.2"
+                            android:text=":" />
+
+                        <TextView
+                            android:id="@+id/address"
+                            style="@style/TextViewStyle"
+                            android:layout_weight="5"
+                            android:paddingLeft="5dp" />
+
+
+
+                    </LinearLayout>
+
+                    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
+
+<ProgressBar
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:id="@+id/progressbar"
+android:visibility="gone"
+android:layout_centerInParent="true"/>
+
+
+
+
+
+    </layout>
