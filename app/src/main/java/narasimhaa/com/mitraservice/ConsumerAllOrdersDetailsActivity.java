@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import java.util.Date;
 import java.util.List;
 
 import narasimhaa.com.mitraservice.Adapater.AllConsumersOrdersAdapter;
+import narasimhaa.com.mitraservice.Adapater.AllOrdersAdapter;
 import narasimhaa.com.mitraservice.Model.AllOrdersResponse;
 import narasimhaa.com.mitraservice.Model.MaterialFilter.MaterialFilterResponseFull;
 import narasimhaa.com.mitraservice.Model.OrdersDataItem;
@@ -107,7 +109,7 @@ public class ConsumerAllOrdersDetailsActivity extends AppCompatActivity implemen
         String strDate = dateFormat.format(date1);
 
         Call<AllOrdersResponse> userCall;
-        userCall = apiInterface.getAllOrders(email,userType,ll_status_type.getText().toString(),strDate);
+        userCall = apiInterface.getAllOrders(email,userType,ll_status_type.getText().toString(),strDate,"","","","");
 
         userCall.enqueue(new Callback<AllOrdersResponse>() {
             @Override
@@ -227,11 +229,118 @@ public class ConsumerAllOrdersDetailsActivity extends AppCompatActivity implemen
 
         // set the custom layout
         final View customLayout = getLayoutInflater().inflate(R.layout.custom_alert_dialog_search, null);
+
+        EditText dialogNameEt = customLayout.findViewById(R.id.dialogNameEt);
+        EditText dialogEmailEt = customLayout.findViewById(R.id.dialogEmailEt);
+        EditText dialogPasswEt = customLayout.findViewById(R.id.dialogPasswEt);
+        EditText dialogBrandEt = customLayout.findViewById(R.id.dialogBrandEt);
+        Button dialogSearchBtn = customLayout.findViewById(R.id.dialogSearchBtn);
+
+
         builder.setView(customLayout);
         //EditText editText = customLayout.findViewById(R.id.editText);
 
+
+
         AlertDialog dialog = builder.create();
         dialog.show();
+        dialogSearchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String location = dialogNameEt.getText().toString();
+
+                String businessName = dialogEmailEt.getText().toString();
+
+                String productName = dialogPasswEt.getText().toString();
+
+                String brandName = dialogBrandEt.getText().toString();
+
+                getDataWithFilterResults(SharedPreferenceUtils.getValue(ConsumerAllOrdersDetailsActivity.this,MyUtilities.PREF_EMAIL),tempUseType,brandName,businessName,productName,location);
+
+                dialog.cancel();
+            }
+        });
+
+    }
+
+    public void getDataWithFilterResults(String email,String userType,String brand_name,String b_name,String s_name,String city) {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ApiInterface.URL_BASE)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(client)
+                .build();
+
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+
+        String sDate1=date.getText().toString();
+        Date date1= null;
+        try {
+            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(sDate1);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = dateFormat.format(date1);
+
+        Call<AllOrdersResponse> userCall;
+        userCall = apiInterface.getAllOrders(email,userType,ll_status_type.getText().toString(),strDate,brand_name,b_name,s_name,city);
+
+        userCall.enqueue(new Callback<AllOrdersResponse>() {
+            @Override
+            public void onResponse(Call<AllOrdersResponse> call, Response<AllOrdersResponse> response) {
+
+                if (response.body() != null) {
+
+                    if (response.body().isStatus() == true) {
+
+
+                        //MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
+
+
+                        data = response.body().getData();
+                        if (data.size()>0){
+                            recyclerView.setVisibility(View.VISIBLE);
+                            allConsumersOrdersAdapter = new AllConsumersOrdersAdapter(data, ConsumerAllOrdersDetailsActivity.this);
+                            recyclerView.setAdapter(allConsumersOrdersAdapter);
+
+                        }else {
+
+                            tvNoData.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.GONE);
+                        }
+
+                    } else {
+                        MyUtilities.cancelAlertDialog(ConsumerAllOrdersDetailsActivity.this);
+
+                        MyUtilities.showToast(ConsumerAllOrdersDetailsActivity.this, MyUtilities.KAlertDialogTitleError);
+                    }
+
+                } else {
+
+                    MyUtilities.cancelAlertDialog(ConsumerAllOrdersDetailsActivity.this);
+                    MyUtilities.showToast(ConsumerAllOrdersDetailsActivity.this, MyUtilities.KAlertDialogTitleError);
+
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<AllOrdersResponse> call, Throwable t) {
+
+                MyUtilities.showToast(ConsumerAllOrdersDetailsActivity.this,MyUtilities.KAlertDialogTitleError);
+                MyUtilities.cancelAlertDialog(ConsumerAllOrdersDetailsActivity.this);
+
+            }
+        });
     }
 
 }

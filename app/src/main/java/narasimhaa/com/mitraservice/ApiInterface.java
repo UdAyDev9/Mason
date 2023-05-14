@@ -98,11 +98,11 @@ public interface ApiInterface {
     @GET("Staff/getFilteredServicePersons")
     Call<FilterResponseFull> getFilteredList(@Query("SERVICE_NAME") String SERVICE_NAME, @Query("CITY") String CITY);
 
-   /* @GET("Staff/getFilteredServicePersons")
-    Call<FilterResponseFull> getFilteredList(@Query("SERVICE_NAME") String SERVICE_NAME, @Query("CITY") String CITY,@Query("SIZE") String SIZE);
-*/
+    /* @GET("Staff/getFilteredServicePersons")
+     Call<FilterResponseFull> getFilteredList(@Query("SERVICE_NAME") String SERVICE_NAME, @Query("CITY") String CITY,@Query("SIZE") String SIZE);
+ */
     @GET("Services/getFilteredServiceTypePersons")
-    Call<MaterialFilterResponseFull> getMaterialFilteredList(@Query("SERVICE_TYPE") String SERVICE_NAME, @Query("CITY") String CITY , @Query("BUSINESS_TYPE") String BUSINESS_TYPE);
+    Call<MaterialFilterResponseFull> getMaterialFilteredList(@Query("SERVICE_TYPE") String SERVICE_NAME, @Query("CITY") String CITY, @Query("BUSINESS_TYPE") String BUSINESS_TYPE);
 
     @GET("Services/getAllActiveServiceTypes")
     Call<MaterialDevelopersServerResponse> getMaterialDevelopersList(@Query("EMAIL_ID") String EMAIL_ID);
@@ -148,7 +148,7 @@ public interface ApiInterface {
     Call<ServerResponse> forgotPassword(@Body String body);
 
     @GET("Users/getAllUsers")
-    Call<MaterialFilterResponseFull> getAllUsers(@Query("USER_TYPE") String USER_TYPE,@Query("REGISTRATION_DATE") String REGISTRATION_DATE);
+    Call<MaterialFilterResponseFull> getAllUsers(@Query("USER_TYPE") String USER_TYPE, @Query("REGISTRATION_DATE") String REGISTRATION_DATE);
 
     @POST("Admin/insertSizeBrand")
     Call<ServerResponse> insertSizeAndBrand(@Body String body);
@@ -163,8 +163,9 @@ public interface ApiInterface {
     Call<ServerResponse> placeOrder(@Body String body);
 
     @GET("Orders/getDetails")
-    Call<AllOrdersResponse> getAllOrders(@Query("EMAIL_ID") String EMAIL_ID, @Query("COMING_FROM") String COMING_FROM,@Query("STATUS") String STATUS_TYPE,@Query("REGISTRATION_DATE") String REGISTRATION_DATE);
-// order status // ORD_ID
+    Call<AllOrdersResponse> getAllOrders(@Query("EMAIL_ID") String EMAIL_ID, @Query("COMING_FROM") String COMING_FROM, @Query("STATUS") String STATUS_TYPE, @Query("REGISTRATION_DATE") String REGISTRATION_DATE, @Query("BRAND_NAME") String BRAND_NAME,@Query("B_NAME") String B_NAME,@Query("S_NAME") String S_NAME,@Query("CITY") String CITY);
+
+    // order status // ORD_ID
     @POST("Orders/changeStatus")
     Call<ServerResponse> changeOrderStatus(@Body String body);
 

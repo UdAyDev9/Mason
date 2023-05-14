@@ -7,6 +7,16 @@ android {
         applicationId "narasimhaa.com.mitraservice"
         minSdkVersion 21
         targetSdkVersion 32
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def date = new Date().format('dd_MMM_yyyy')
+                def time = new Date().format('HH_mm')
+                def buildType = variant.buildType.name.toLowerCase()
+                def flavor = variant.flavorName.toLowerCase()
+                def apkName = "mason_${buildType}_${date}_${time}.apk"
+                output.outputFileName = apkName
+            }
+        }
         versionCode 1
         versionName "1.0"
         multiDexEnabled true

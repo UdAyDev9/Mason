@@ -125,7 +125,7 @@ public class AllOrdersAdapter extends RecyclerView.Adapter<AllOrdersAdapter.MyRe
         public MyResultsViewHolder(@NonNull View itemView) {
             super(itemView);
             tvMaterialType = itemView.findViewById(R.id.tv_material_type);
-            tvBusinessName = itemView.findViewById(R.id.tv_business_name);
+            tvBusinessName = itemView.findViewById(R.id.tv_business_name_);
             tvBrandNames = itemView.findViewById(R.id.tv_brand_names_);
             tvOrderId = itemView.findViewById(R.id.tv_order_id);
             tv_sub_category = itemView.findViewById(R.id.tv_sub_category);
