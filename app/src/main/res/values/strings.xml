@@ -113,10 +113,10 @@
     </string-array>
 
     <string-array name="order_status_array">
-        <item>ORDER_STATUS_PENDING</item>
-        <item>ORDER_STATUS_QUOTED</item>
-        <item>ORDER_STATUS_PROCESSED</item>
-        <item>ORDER_STATUS_DELIVERED</item>
+        <item>Pending</item>
+        <item>Quoted</item>
+        <item>Processed</item>
+        <item>Delivered</item>
         <!--
                 <item>Material Supplier</item>
         -->

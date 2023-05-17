@@ -209,7 +209,7 @@ public class AllProductsListActivityCopy extends AppCompatActivity {
                     jsonObject1.put("QNTY", productlistdata1.getQuantity());
                     jsonObject1.put("I_PRICE", productlistdata1.getPRICE());
                     jsonObject1.put("T_PRICE", Double.parseDouble(productlistdata1.getPRICE()) * productlistdata1.getQuantity());
-                    jsonObject1.put("STATUS", "PENDING");
+                    jsonObject1.put("STATUS", "Pending");
                     jsonObject1.put("DELIVERY_TYPE", deliveryType);
                     jsonArray.put(jsonObject1);
                 }

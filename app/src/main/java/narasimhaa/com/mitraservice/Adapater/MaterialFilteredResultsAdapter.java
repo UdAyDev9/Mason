@@ -54,8 +54,8 @@ public class MaterialFilteredResultsAdapter extends RecyclerView.Adapter<Materia
             holder.tv_mobile.setText(list.get(position).getMOBILENO());
             holder.pincode.setText(list.get(position).getPINCODENO().trim());
             holder.tv_brands.setText(list.get(position).getBRANDNAME().trim());
-            holder.tv_shape.setText(list.get(position).getBUSINESSTYPE().trim());
-            holder.tv_sub_category.setText(list.get(position).getHEIGHT().trim());
+            holder.tv_shape.setText(list.get(position).getHEIGHT().trim());
+            holder.tv_sub_category.setText(list.get(position).getBUSINESSTYPE().trim());
         } catch (Exception e) {
             e.printStackTrace();
         }

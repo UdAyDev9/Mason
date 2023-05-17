@@ -106,7 +106,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
         Menu menu = navigationView.getMenu();
 
-        if (SharedPreferenceUtils.getValue(DashBoardActivity.this, MyUtilities.PREF_USER_TYPE).equals("Individual")) {
+        if (SharedPreferenceUtils.getValue(DashBoardActivity.this, MyUtilities.PREF_USER_TYPE).equals("Retailer")) {
             navigationView.getMenu().clear();
             navigationView.inflateMenu(R.menu.nav_menu_for_user);
             switchChangeStatus.setVisibility(View.INVISIBLE);

@@ -163,7 +163,7 @@ public interface ApiInterface {
     Call<ServerResponse> placeOrder(@Body String body);
 
     @GET("Orders/getDetails")
-    Call<AllOrdersResponse> getAllOrders(@Query("EMAIL_ID") String EMAIL_ID, @Query("COMING_FROM") String COMING_FROM, @Query("STATUS") String STATUS_TYPE, @Query("REGISTRATION_DATE") String REGISTRATION_DATE, @Query("BRAND_NAME") String BRAND_NAME,@Query("B_NAME") String B_NAME,@Query("S_NAME") String S_NAME,@Query("CITY") String CITY);
+    Call<AllOrdersResponse> getAllOrders(@Query("EMAIL_ID") String EMAIL_ID, @Query("COMING_FROM") String COMING_FROM, @Query("STATUS") String STATUS_TYPE, @Query("DATE") String REGISTRATION_DATE, @Query("BRAND_NAME") String BRAND_NAME,@Query("B_NAME") String B_NAME,@Query("S_NAME") String S_NAME,@Query("CITY") String CITY);
 
     // order status // ORD_ID
     @POST("Orders/changeStatus")

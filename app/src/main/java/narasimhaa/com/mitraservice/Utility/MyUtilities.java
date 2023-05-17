@@ -122,16 +122,15 @@ public class MyUtilities {
 	public static final String INTENT_KEY_OFFER_PRICE = "INTENT_KEY_OFFER_PRICE";
 	public static final String INTENT_KEY_ID = "INTENT_KEY_ID";
 	public static final String PLACES_API_KEY = "AIzaSyDsGDyeOF-dCOwuQgTMvNEXLV1zicuG8_Q";
-	public static final String ORDER_STATUS_PENDING = "ORDER_STATUS_PENDING";
-	public static final String ORDER_STATUS_QUOTED = "ORDER_STATUS_QUOTED";
-	public static final String ORDER_STATUS_PROCESSED = "ORDER_STATUS_PROCESSED";
-	public static final String ORDER_STATUS_DELIVERED = "ORDER_STATUS_DELIVERED";
+	public static final String ORDER_STATUS_PENDING = "Pending";
+	public static final String ORDER_STATUS_QUOTED = "Quoted";
+	public static final String ORDER_STATUS_PROCESSED = "Processed";
+	public static final String ORDER_STATUS_DELIVERED = "Delivered";
 
 
 	public static void showAlertDialog(Context context,int type,String title){
 
 		pDialog = new KAlertDialog(context,type);
-
 		pDialog.getProgressHelper().setBarColor(Color.parseColor("#1e88e5"));
 		pDialog.setTitleText(title);
 		pDialog.setCancelable(true);

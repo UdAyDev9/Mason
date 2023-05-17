@@ -195,8 +195,8 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
 
 
         List<String> categories = new ArrayList<String>();
-        categories.add("Material Supplier");
-        categories.add("Developer");
+        //categories.add("Material Supplier");
+        //categories.add("Developer");
         categories.add("Retailer");
         categories.add("Admin");
         categories.add("Dealer");
