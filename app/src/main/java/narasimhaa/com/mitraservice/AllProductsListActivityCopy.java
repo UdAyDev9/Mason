@@ -198,19 +198,23 @@ public class AllProductsListActivityCopy extends AppCompatActivity {
                     JSONObject jsonObject1 = new JSONObject();
                     DataItem productlistdata1 = data.get(i);
                     float dis;
-                    jsonObject1.put("EMAIL_ID", SharedPreferenceUtils.getValue(AllProductsListActivityCopy.this, MyUtilities.PREF_EMAIL));
-                    jsonObject1.put("RET_EMAIL_ID", productlistdata1.getEMAILID());
+                    jsonObject1.put("EMAIL_ID", productlistdata1.getEMAILID());
+                    jsonObject1.put("RET_EMAIL_ID",SharedPreferenceUtils.getValue(AllProductsListActivityCopy.this, MyUtilities.PREF_EMAIL));
                     jsonObject1.put("S_NAME", productlistdata1.getSERVICETYPE());
                     jsonObject1.put("B_NAME", productlistdata1.getBUSINESSNAME());
                     jsonObject1.put("BRAND_NAME", productlistdata1.getBRANDNAME());
                     jsonObject1.put("SIZE", productlistdata1.getWEIGHT());
                     jsonObject1.put("N_ITEMS", productlistdata1.getWEIGHT());
-                    jsonObject1.put("SIZE_QNTY", "NO_IDEA");
+                    jsonObject1.put("SIZE_QNTY", productlistdata1.getQuantity());
                     jsonObject1.put("QNTY", productlistdata1.getQuantity());
                     jsonObject1.put("I_PRICE", productlistdata1.getPRICE());
                     jsonObject1.put("T_PRICE", Double.parseDouble(productlistdata1.getPRICE()) * productlistdata1.getQuantity());
                     jsonObject1.put("STATUS", "Pending");
                     jsonObject1.put("DELIVERY_TYPE", deliveryType);
+                    jsonObject1.put("PERIMETER", productlistdata1.getPERIMETER());
+                    jsonObject1.put("LENGTH", productlistdata1.getLENGTH());
+                    jsonObject1.put("THICKNESS", productlistdata1.getTHICKNESS());
+                    jsonObject1.put("WEIGHT", productlistdata1.getWEIGHT());
                     jsonArray.put(jsonObject1);
                 }
 

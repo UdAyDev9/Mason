@@ -85,7 +85,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
         layoutManager = new LinearLayoutManager(AllOrdersDetailsActivity.this);
         recyclerView.setLayoutManager(layoutManager);
     }
-    public void getData(String email,String userType) {
+    public void getData(String email,String userType,String statusType) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -171,13 +171,12 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
         if(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Dealer")
         || SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Material Supplier")
         || SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Developer")){
-
             tempUseType= "DEALER";
         }else if (SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Individual")
                 || SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Retailer")){
-            tempUseType= "CONSUMER";
+            tempUseType= "Retailer";
         }
-        getData(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this,MyUtilities.PREF_EMAIL),tempUseType);
+        getData(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this,MyUtilities.PREF_EMAIL),tempUseType,"");
 
     }
 
@@ -221,7 +220,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
 
 
                         //MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
-                        getData(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this,MyUtilities.PREF_EMAIL),tempUseType);
+                        getData(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this,MyUtilities.PREF_EMAIL),tempUseType,"");
 
                     } else {
                         MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
@@ -275,7 +274,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 try {
-                    getData("","");
+                    getData(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this,MyUtilities.PREF_EMAIL),tempUseType,"");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -288,7 +287,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         date.setText(datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth());
         try {
-            getData("","");
+            getData(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this,MyUtilities.PREF_EMAIL),tempUseType,"");
         } catch (Exception e) {
             e.printStackTrace();
         }

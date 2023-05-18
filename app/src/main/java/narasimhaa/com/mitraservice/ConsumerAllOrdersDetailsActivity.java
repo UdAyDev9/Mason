@@ -172,7 +172,7 @@ public class ConsumerAllOrdersDetailsActivity extends AppCompatActivity implemen
             tempUseType= "DEALER";
         }else if (SharedPreferenceUtils.getValue(ConsumerAllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Individual")
                 || SharedPreferenceUtils.getValue(ConsumerAllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Retailer")){
-            tempUseType= "CONSUMER";
+            tempUseType= "Retailer";
         }
         getData(SharedPreferenceUtils.getValue(ConsumerAllOrdersDetailsActivity.this,MyUtilities.PREF_EMAIL),tempUseType,"");
 
