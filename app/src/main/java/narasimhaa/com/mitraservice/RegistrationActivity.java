@@ -317,8 +317,16 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
 
         rvCities = findViewById(R.id.rv_cities);
         rvAddress = findViewById(R.id.rv_address);
-        et_City.addTextChangedListener(mTextWatcherCities);
-
+        et_City.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    et_City.addTextChangedListener(mTextWatcherCities);
+                } else {
+                    et_City.removeTextChangedListener(mTextWatcherCities);
+                }
+            }
+        });
         mAutoCompleteAdapterCities = new PlacesAutoCompleteAdapter(this, TypeFilter.CITIES);
         final LinearLayoutManager layoutManagerCities = new LinearLayoutManager(this);
         final LinearLayoutManager layoutManagerAddress = new LinearLayoutManager(this);
@@ -327,6 +335,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
             @Override
             public void click(Place place) {
                 et_City.setText(place.getAddress());
+                et_City.setSelection(et_City.getText().toString().length());
                 rvCities.setVisibility(View.GONE);
                 Log.d("plx", "place:" + place.getName());
             }

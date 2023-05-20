@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (SharedPreferenceUtils.getLoginState(MainActivity.this)==true){
+        if (SharedPreferenceUtils.getLoginState(MainActivity.this) == true) {
             Intent intent = new Intent(getApplicationContext(), DashBoardActivity.class);
             startActivity(intent);
             finish();
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar_extra);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("MrMason LogIn");
-        sharedpreferences = getSharedPreferences("LoginPREFERENCES",MODE_PRIVATE);
+        sharedpreferences = getSharedPreferences("LoginPREFERENCES", MODE_PRIVATE);
         editor = sharedpreferences.edit();
         pDialog = new KAlertDialog(this, KAlertDialog.PROGRESS_TYPE);
         forgot_password.setOnClickListener(new View.OnClickListener() {
@@ -91,114 +91,117 @@ public class MainActivity extends AppCompatActivity {
         mNetworkReceiver = new NetworkChangeListener();
         registerNetworkBroadcastForNougat();
 
-        bt_login.setOnClickListener(new View.OnClickListener()
-
-        {
+        bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View view){
+            public void onClick(View view) {
 
                 if (et_mno.getText().toString().trim().length() == 0) {
                     et_mno.setError("Please Enter EMail");
                     et_mno.requestFocus();
-                }else if (et_password.getText().toString().trim().length() == 0) {
+                } else if (et_password.getText().toString().trim().length() == 0) {
                     et_password.setError("Please Enter Password");
                     et_password.requestFocus();
                 } else {
 
-                    pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-                    pDialog.setTitleText("Loading...");
-                    pDialog.setCancelable(false);
-                    //pDialog.show();
+                    if (MyUtilities.isNetworkAvailable(MainActivity.this)) {
 
-                    MyUtilities.showAlertDialog(MainActivity.this,KAlertDialog.PROGRESS_TYPE,MyUtilities.KAlertDialogTitleLoding);
-                    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-                    interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                        pDialog.setTitleText("Loading...");
+                        pDialog.setCancelable(false);
+                        //pDialog.show();
+                        MyUtilities.showAlertDialog(MainActivity.this, KAlertDialog.PROGRESS_TYPE, MyUtilities.KAlertDialogTitleLoding);
+                        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+                        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-                    Gson gson = new GsonBuilder()
-                            .setLenient()
-                            .create();
-                    OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(ApiInterface.URL_BASE)
-                            .addConverterFactory(ScalarsConverterFactory.create())
-                            .addConverterFactory(GsonConverterFactory.create(gson))
-                            .client(client)
-                            .build();
+                        Gson gson = new GsonBuilder()
+                                .setLenient()
+                                .create();
+                        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl(ApiInterface.URL_BASE)
+                                .addConverterFactory(ScalarsConverterFactory.create())
+                                .addConverterFactory(GsonConverterFactory.create(gson))
+                                .client(client)
+                                .build();
 
-                    ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+                        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
-                    try {
-                        JsonObject jsonObject = new JsonObject();
-                        jsonObject.addProperty("EMAIL_ID", et_mno.getText().toString());
-                        jsonObject.addProperty("PASSWORD", et_password.getText().toString());
-                        editor.putString("userName", et_mno.getText().toString());
-                        editor.putString("userPwd", et_password.getText().toString());
-                        editor.commit();
+                        try {
+                            JsonObject jsonObject = new JsonObject();
+                            jsonObject.addProperty("EMAIL_ID", et_mno.getText().toString());
+                            jsonObject.addProperty("PASSWORD", et_password.getText().toString());
+                            editor.putString("userName", et_mno.getText().toString());
+                            editor.putString("userPwd", et_password.getText().toString());
+                            editor.commit();
 
-                        String jsonStr = String.valueOf(jsonObject);
+                            String jsonStr = String.valueOf(jsonObject);
 
-                        Call<ServerResponse> userCall = apiInterface.getLoginResponsee(jsonObject.toString());
+                            Call<ServerResponse> userCall = apiInterface.getLoginResponsee(jsonObject.toString());
 
-                        userCall.enqueue(new Callback<ServerResponse>() {
-                            @Override
-                            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                            userCall.enqueue(new Callback<ServerResponse>() {
+                                @Override
+                                public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
 
-                                if (response.body()!=null){
+                                    if (response.body() != null) {
 
-                                    Log.d("responsee", "onResponse: " + response.body().getStatus());
-                                    Log.e("responsee", "onResponse: " + response.body().getMsg());
+                                        Log.d("responsee", "onResponse: " + response.body().getStatus());
+                                        Log.e("responsee", "onResponse: " + response.body().getMsg());
 
-                                    if(response.body().getStatus()==true)
-                                    {
-                                        SharedPreferenceUtils.setValue(MainActivity.this,MyUtilities.PREF_EMAIL,response.body().getData().getEMAILID());
-                                        SharedPreferenceUtils.setValue(MainActivity.this,MyUtilities.PREF_USER_NAME,response.body().getData().getNAME());
-                                        SharedPreferenceUtils.setValue(MainActivity.this,MyUtilities.PREF_BOD_SEQ_NO,response.body().getData().getBODSEQNO());
-                                        SharedPreferenceUtils.setValue(MainActivity.this,MyUtilities.PREF_USER_TYPE,response.body().getData().getUSERTYPE());
-                                        SharedPreferenceUtils.setValue(MainActivity.this,MyUtilities.PREF_USER_MOBILE_NO,response.body().getData().getMOBILENO());
-                                        SharedPreferenceUtils.setValue(MainActivity.this,MyUtilities.PREF_USER_CITY,response.body().getData().getCITY());
-                                        SharedPreferenceUtils.setValue(MainActivity.this,MyUtilities.PREF_USER_ADDRESS,response.body().getData().getADDRESS());
-                                        SharedPreferenceUtils.setValue(MainActivity.this,MyUtilities.PREF_USER_PINCODE,response.body().getData().getPINCODENO());
+                                        if (response.body().getStatus() == true) {
+                                            SharedPreferenceUtils.setValue(MainActivity.this, MyUtilities.PREF_EMAIL, response.body().getData().getEMAILID());
+                                            SharedPreferenceUtils.setValue(MainActivity.this, MyUtilities.PREF_USER_NAME, response.body().getData().getNAME());
+                                            SharedPreferenceUtils.setValue(MainActivity.this, MyUtilities.PREF_BOD_SEQ_NO, response.body().getData().getBODSEQNO());
+                                            SharedPreferenceUtils.setValue(MainActivity.this, MyUtilities.PREF_USER_TYPE, response.body().getData().getUSERTYPE());
+                                            SharedPreferenceUtils.setValue(MainActivity.this, MyUtilities.PREF_USER_MOBILE_NO, response.body().getData().getMOBILENO());
+                                            SharedPreferenceUtils.setValue(MainActivity.this, MyUtilities.PREF_USER_CITY, response.body().getData().getCITY());
+                                            SharedPreferenceUtils.setValue(MainActivity.this, MyUtilities.PREF_USER_ADDRESS, response.body().getData().getADDRESS());
+                                            SharedPreferenceUtils.setValue(MainActivity.this, MyUtilities.PREF_USER_PINCODE, response.body().getData().getPINCODENO());
 
-                                        MyUtilities.cancelAlertDialog(MainActivity.this);
-                                        Intent intent = new Intent(getApplicationContext(), DashBoardActivity.class);
-                                        startActivity(intent);
-                                        finish();
-
-
-                                    }else{
+                                            MyUtilities.cancelAlertDialog(MainActivity.this);
+                                            Intent intent = new Intent(getApplicationContext(), DashBoardActivity.class);
+                                            startActivity(intent);
+                                            finish();
 
 
-                                        Toast.makeText(MainActivity.this,"Invalid Username or password.",Toast.LENGTH_LONG).show();
+                                        } else {
 
-                                       MyUtilities.cancelAlertDialog(MainActivity.this);
+                                            //Toast.makeText(MainActivity.this,"Invalid Username or password.",Toast.LENGTH_LONG).show();
+
+                                            MyUtilities.cancelAlertDialog(MainActivity.this);
+                                            MyUtilities.showToast(MainActivity.this, response.body().getMsg());
+
+                                        }
+                                    } else {
+
+                                        //MyUtilities.showAlertDialog(MainActivity.this,KAlertDialog.ERROR_TYPE,MyUtilities.KAlertDialogTitleError);
+                                        MyUtilities.showToast(MainActivity.this, MyUtilities.KAlertDialogTitleError);
 
                                     }
-                                }else {
-
-                                    //MyUtilities.showAlertDialog(MainActivity.this,KAlertDialog.ERROR_TYPE,MyUtilities.KAlertDialogTitleError);
-                                    MyUtilities.showToast(MainActivity.this,MyUtilities.KAlertDialogTitleError);
 
                                 }
 
-                            }
+                                @Override
+                                public void onFailure(Call<ServerResponse> call, Throwable t) {
 
-                            @Override
-                            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                                    Log.e("erro", "onFailure: " + t.getMessage());
+                                    //pDialog.cancel();
+                                    MyUtilities.showToast(MainActivity.this, MyUtilities.KAlertDialogTitleError);
+                                    MyUtilities.cancelAlertDialog(MainActivity.this);
 
-                                Log.e("erro", "onFailure: " + t.getMessage());
-                                 //pDialog.cancel();
-                                MyUtilities.showToast(MainActivity.this,MyUtilities.KAlertDialogTitleError);
-                                MyUtilities.cancelAlertDialog(MainActivity.this);
+                                    //MyUtilities.showAlertDialog(MainActivity.this,KAlertDialog.ERROR_TYPE,MyUtilities.KAlertDialogTitleError);
 
-                                //MyUtilities.showAlertDialog(MainActivity.this,KAlertDialog.ERROR_TYPE,MyUtilities.KAlertDialogTitleError);
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            MyUtilities.showToast(MainActivity.this, MyUtilities.KAlertDialogTitleError);
 
-                            }
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        MyUtilities.showToast(MainActivity.this,MyUtilities.KAlertDialogTitleError);
+                            //MyUtilities.showAlertDialog(MainActivity.this,KAlertDialog.ERROR_TYPE,MyUtilities.KAlertDialogTitleError);
+                        }
 
-                        //MyUtilities.showAlertDialog(MainActivity.this,KAlertDialog.ERROR_TYPE,MyUtilities.KAlertDialogTitleError);
+                    } else {
+
+                        MyUtilities.showToast(MainActivity.this, getString(R.string.please_check_your_internet_connection));
                     }
                 }
             }
@@ -221,9 +224,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void dialog(boolean value){
+    public void dialog(boolean value) {
 
-        if(value){
+        if (value) {
         /*    tv_check_connection.setText("We are back !!!");
             tv_check_connection.setBackgroundColor(Color.GREEN);
             tv_check_connection.setTextColor(Color.WHITE);*/
@@ -240,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
             handler.postDelayed(delayrunnable, 3000);
-        }else {
+        } else {
         /*    tv_check_connection.setVisibility(View.VISIBLE);
             tv_check_connection.setText("Could not Connect to internet");
             tv_check_connection.setBackgroundColor(Color.RED);
@@ -276,8 +279,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferenceUtils.setValue(MainActivity.this,MyUtilities.PREF_SERVICE_SEARCH,"");
-        SharedPreferenceUtils.setValue(MainActivity.this,MyUtilities.PREF_CITY_SEARCH,"");
+        SharedPreferenceUtils.setValue(MainActivity.this, MyUtilities.PREF_SERVICE_SEARCH, "");
+        SharedPreferenceUtils.setValue(MainActivity.this, MyUtilities.PREF_CITY_SEARCH, "");
 
     }
 }

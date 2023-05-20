@@ -141,7 +141,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
                     } else {
                         MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
 
-                        MyUtilities.showToast(AllOrdersDetailsActivity.this, MyUtilities.KAlertDialogTitleError);
+                        MyUtilities.showToast(AllOrdersDetailsActivity.this, response.body().getMessage());
                     }
 
                 } else {
@@ -391,7 +391,9 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
                     } else {
                         MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
 
-                        MyUtilities.showToast(AllOrdersDetailsActivity.this, MyUtilities.KAlertDialogTitleError);
+                        MyUtilities.showToast(AllOrdersDetailsActivity.this, response.body().getMessage());
+                        recyclerView.setVisibility(View.GONE);
+
                     }
 
                 } else {

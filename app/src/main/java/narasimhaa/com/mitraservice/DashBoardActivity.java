@@ -226,7 +226,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.dash_board, menu);
+       /* getMenuInflater().inflate(R.menu.dash_board, menu);
 
         MenuItem itemSwitch = menu.findItem(R.id.switch_action_bar);
         itemSwitch.setActionView(R.layout.use_switch);
@@ -244,7 +244,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                     Toast.makeText(DashBoardActivity.this, "Not Available", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });*/
         return true;
     }
 

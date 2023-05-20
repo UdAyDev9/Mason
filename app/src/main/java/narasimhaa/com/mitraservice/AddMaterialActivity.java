@@ -388,7 +388,13 @@ public class AddMaterialActivity extends AppCompatActivity {
 
                     } else {
 
-                        addOrUpdateService(isFromUpdate);
+                        if (MyUtilities.isNetworkAvailable(AddMaterialActivity.this)) {
+
+                            addOrUpdateService(isFromUpdate);
+                        } else {
+                            MyUtilities.showToast(AddMaterialActivity.this, getString(R.string.please_check_your_internet_connection));
+
+                        }
                     }
 
                 } else if (isCementOrPaints) {
@@ -399,8 +405,13 @@ public class AddMaterialActivity extends AppCompatActivity {
 //                    addOrUpdateService(true);
 
                     } else {
+                        if (MyUtilities.isNetworkAvailable(AddMaterialActivity.this)) {
 
-                        addOrUpdateService(isFromUpdate);
+                            addOrUpdateService(isFromUpdate);
+                        } else {
+                            MyUtilities.showToast(AddMaterialActivity.this, getString(R.string.please_check_your_internet_connection));
+
+                        }
                     }
 
                 } else {
@@ -411,8 +422,13 @@ public class AddMaterialActivity extends AppCompatActivity {
 //                    addOrUpdateService(true);
 
                     } else {
+                        if (MyUtilities.isNetworkAvailable(AddMaterialActivity.this)) {
 
-                        addOrUpdateService(isFromUpdate);
+                            addOrUpdateService(isFromUpdate);
+                        } else {
+                            MyUtilities.showToast(AddMaterialActivity.this, getString(R.string.please_check_your_internet_connection));
+
+                        }
                     }
 
                 }

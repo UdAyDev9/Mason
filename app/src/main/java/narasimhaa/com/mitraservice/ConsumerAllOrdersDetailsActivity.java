@@ -121,8 +121,6 @@ public class ConsumerAllOrdersDetailsActivity extends AppCompatActivity implemen
 
 
                         //MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
-
-
                         data = response.body().getData();
                         if (data.size()>0){
                             recyclerView.setVisibility(View.VISIBLE);
@@ -131,14 +129,16 @@ public class ConsumerAllOrdersDetailsActivity extends AppCompatActivity implemen
 
                         }else {
 
-                            tvNoData.setVisibility(View.VISIBLE);
+                            //tvNoData.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);
                         }
 
                     } else {
                         MyUtilities.cancelAlertDialog(ConsumerAllOrdersDetailsActivity.this);
 
-                        MyUtilities.showToast(ConsumerAllOrdersDetailsActivity.this, MyUtilities.KAlertDialogTitleError);
+                        MyUtilities.showToast(ConsumerAllOrdersDetailsActivity.this, response.body().getMessage());
+                        //tvNoData.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
                     }
 
                 } else {
@@ -314,15 +314,16 @@ public class ConsumerAllOrdersDetailsActivity extends AppCompatActivity implemen
 
                         }else {
 
-                            tvNoData.setVisibility(View.VISIBLE);
+                            //tvNoData.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);
                         }
 
                     } else {
                         MyUtilities.cancelAlertDialog(ConsumerAllOrdersDetailsActivity.this);
 
-                        MyUtilities.showToast(ConsumerAllOrdersDetailsActivity.this, MyUtilities.KAlertDialogTitleError);
-                    }
+                        MyUtilities.showToast(ConsumerAllOrdersDetailsActivity.this, response.body().getMessage());
+                        //tvNoData.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);                    }
 
                 } else {
 

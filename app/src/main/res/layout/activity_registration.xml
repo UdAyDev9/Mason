@@ -252,15 +252,17 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/home_line_color"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-                <EditText android:layout_margin="1dp"
+                <EditText
+                    android:layout_margin="1dp"
                     android:drawableEnd="@drawable/ic_person_pin_circle_black_24dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/home_txt_color"
-                    android:hint="Enter City "
+                    android:hint="Enter City"
                     android:inputType="text"
+                    android:focusableInTouchMode="true"
                     android:id="@+id/et_city"
                     android:drawableTint="@color/colorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>

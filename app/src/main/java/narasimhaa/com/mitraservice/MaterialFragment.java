@@ -309,6 +309,7 @@ public class MaterialFragment extends Fragment {
             @Override
             public void click(Place place) {
                 et_city.setText(place.getAddress());
+                et_city.setSelection(et_city.getText().toString().length());
                 recyclerViewCities.setVisibility(View.GONE);
                 Log.d("plx", "place:" + place.getName());
             }

@@ -626,22 +626,13 @@ public static void cancelAlertDialog(Context context){
 		}
 	}
 
-
-
-	public static boolean isMobileDataEnabled(Context context){
-
-		try {
-
-			ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-			NetworkInfo info = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-			return info != null && info.isConnected();
-		}catch (Exception e){
-
-			e.printStackTrace();
-
+	public static boolean isNetworkAvailable(Context context) {
+		ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (connectivityManager != null) {
+			NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+			return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 		}
-
-		return  false;
+		return false;
 	}
 
 	/**
