@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,20 +19,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.kinda.alert.KAlertDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import narasimhaa.com.mitraservice.Adapater.AllProductAdapter;
-import narasimhaa.com.mitraservice.Adapater.AllProductAdapterCopy;
+import narasimhaa.com.mitraservice.Adapater.AllProductAdapterUpdated;
 import narasimhaa.com.mitraservice.Model.MaterialDevelopers.DataItem;
 import narasimhaa.com.mitraservice.Model.MaterialDevelopers.MaterialDevelopersServerResponse;
 import narasimhaa.com.mitraservice.Model.ServerResponse;
@@ -59,7 +54,7 @@ public class AllProductsListActivityCopy extends AppCompatActivity {
     private List<DataItem> data;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    AllProductAdapterCopy allProductDetailsAdapter;
+    AllProductAdapterUpdated allProductDetailsAdapter;
     TextView tvTotalPrice;
     private List<Double> selectedPrices = new ArrayList<>();
     private List<Integer> selectedQuantities = new ArrayList<>();
@@ -140,7 +135,7 @@ public class AllProductsListActivityCopy extends AppCompatActivity {
                         data = response.body().getData();
                         if (data.size() > 0) {
                             recyclerView.setVisibility(View.VISIBLE);
-                            allProductDetailsAdapter = new AllProductAdapterCopy(AllProductsListActivityCopy.this, data);
+                            allProductDetailsAdapter = new AllProductAdapterUpdated(AllProductsListActivityCopy.this, data);
                             recyclerView.setAdapter(allProductDetailsAdapter);
 
                         } else {

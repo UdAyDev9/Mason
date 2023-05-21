@@ -58,6 +58,11 @@ public class AllProductAdapter extends RecyclerView.Adapter<AllProductAdapter.My
         holder.tv_size.setText(dataItem.getWEIGHT());
         holder.tv_shape.setText(dataItem.getBUSINESSTYPE());
         holder.txt_totalProductPrice.setText(dataItem.getPRICE());
+        holder.tv_perimeter.setText(dataItem.getPERIMETER());
+        holder.tv_length.setText(dataItem.getLENGTH());
+        holder.tv_thickness.setText(dataItem.getTHICKNESS());
+        holder.tv_weight.setText(dataItem.getwEIGHT());
+
 
 
         holder.plus.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +115,7 @@ public class AllProductAdapter extends RecyclerView.Adapter<AllProductAdapter.My
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvMaterialType, tvBusinessName, tvBusinessType, tvDoorDelivery, tvBrandNames, tv_brand_names, textView7, tv_sub_category, tv_shape, tv_size, tv_mrp, tv_offer_price;
+        private TextView tvMaterialType, tvBusinessName, tvBusinessType, tvDoorDelivery, tvBrandNames, tv_brand_names, textView7, tv_sub_category, tv_shape, tv_size, tv_mrp, tv_offer_price,tv_perimeter, tv_length, tv_weight, tv_thickness;
         private Button update_btn;
         private AppCompatTextView txt_totalProductPrice, quantity, plus, minus;
 
@@ -132,6 +137,10 @@ public class AllProductAdapter extends RecyclerView.Adapter<AllProductAdapter.My
             minus = (AppCompatTextView) itemView.findViewById(R.id.minus);
             quantity = (AppCompatTextView) itemView.findViewById(R.id.count);
             txt_totalProductPrice = (AppCompatTextView) itemView.findViewById(R.id.totalProductPrice);
+            tv_perimeter = itemView.findViewById(R.id.tv_perimeter);
+            tv_length    = itemView.findViewById(R.id.tv_length);
+            tv_weight    = itemView.findViewById(R.id.tv_weight);
+            tv_thickness = itemView.findViewById(R.id.tv_thickness);
 
         }
     }

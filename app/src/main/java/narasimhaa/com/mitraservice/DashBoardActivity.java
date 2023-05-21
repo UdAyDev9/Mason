@@ -116,7 +116,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         } else if (SharedPreferenceUtils.getValue(DashBoardActivity.this, MyUtilities.PREF_USER_TYPE).equals("Developer")) {
             navigationView.getMenu().clear();
             navigationView.inflateMenu(R.menu.activity_dash_board_drawer);
-            switchChangeStatus.setVisibility(View.VISIBLE);
+            switchChangeStatus.setVisibility(View.GONE);
             MenuItem nav_add_developer_or_material = menu.findItem(R.id.AddMyService);
             nav_add_developer_or_material.setTitle("Add Service");
             isDeveloper = true;
@@ -126,14 +126,14 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         } else if (SharedPreferenceUtils.getValue(DashBoardActivity.this, MyUtilities.PREF_USER_TYPE).equals("Admin")) {
             navigationView.getMenu().clear();
             navigationView.inflateMenu(R.menu.nav_menu_for_admin);
-            //switchChangeStatus.setVisibility(View.VISIBLE);
+            //switchChangeStatus.setVisibility(View.GONE);
             tabLayout.setVisibility(View.GONE);
             viewPager.setVisibility(View.GONE);
 
         } else {
             navigationView.getMenu().clear();
             navigationView.inflateMenu(R.menu.activity_dash_board_drawer);
-            switchChangeStatus.setVisibility(View.VISIBLE);
+            //switchChangeStatus.setVisibility(View.GONE);
             MenuItem nav_add_developer_or_material = menu.findItem(R.id.AddMyService);
             MenuItem nav_add_update_developer_material = menu.findItem(R.id.nav_update_service_material);
             nav_add_developer_or_material.setTitle("Add Material");
@@ -275,7 +275,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 @Override
                 public void onClick(View v) {
 
-                    availableTv.setVisibility(View.VISIBLE);
+                    availableTv.setVisibility(View.GONE);
                     availableTv.setText("Available");
                     availableTv.setTextColor(getColor(R.color.green));
                     ivNotavaialable.setVisibility(View.GONE);
@@ -293,7 +293,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 @Override
                 public void onClick(View v) {
 
-                       /* availableTv.setVisibility(View.VISIBLE);
+                       /* availableTv.setVisibility(View.GONE);
                         availableTv.setText("Not Available");
                         availableTv.setTextColor(getColor(R.color.red));*/
                     ivNotavaialable.setVisibility(View.VISIBLE);
@@ -685,7 +685,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                     if (response.body().getStatus() == true) {
 
-                        switchChangeStatus.setVisibility(View.VISIBLE);
+                        switchChangeStatus.setVisibility(View.GONE);
 
                         MyUtilities.cancelAlertDialog(DashBoardActivity.this);
 
@@ -696,13 +696,13 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (homePageBeanData.getSTATUS().equals("ACTIVE")) {
 
                             switchChangeStatus.setChecked(true);
-                            availableTv.setVisibility(View.VISIBLE);
+                            availableTv.setVisibility(View.GONE);
                             availableTv.setText("AVAILABLE");
 
                         } else {
 
                             switchChangeStatus.setChecked(false);
-                            availableTv.setVisibility(View.VISIBLE);
+                            availableTv.setVisibility(View.GONE);
                             availableTv.setText("UNAVAILABLE");
 
                         }
