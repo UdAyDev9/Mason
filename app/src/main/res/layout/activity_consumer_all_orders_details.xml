@@ -19,7 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+        <ImageView
+            android:id="@+id/img_filter"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="4dp"
+            android:src="@drawable/baseline_filter_alt_24"
+            android:layout_marginStart="9dp"
+            android:layout_gravity="end"/>
+        </androidx.appcompat.widget.Toolbar>
+
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -111,19 +122,24 @@
             android:layout_marginEnd="9dp"
             android:layout_marginBottom="9dp"
             android:orientation="vertical"/>
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/filter_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_gravity="end"
-            android:layout_margin="27dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginEnd="27dp"
+            android:layout_marginBottom="27dp"
             android:background="@color/colorPrimary"
-            android:tint="@color/white"
+            android:scaleType="center"
             android:src="@drawable/baseline_filter_alt_24"
+            android:tint="@color/black"
             app:fabSize="normal"
-             />
+            android:visibility="gone"/>
     </RelativeLayout>
 
 </LinearLayout>

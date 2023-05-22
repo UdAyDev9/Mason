@@ -267,7 +267,8 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="20dp"                                android:textColor="@color/black"
+                            android:layout_margin="20dp"
+                            android:textColor="@color/black"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.925"
                             app:layout_constraintStart_toStartOf="parent"
@@ -280,38 +281,26 @@
                                 android:orientation="vertical"
                                 app:layout_constraintGuide_begin="99dp" />
 
-
-
-                            <LinearLayout
-                                android:id="@+id/ll_business_name"
-                                android:layout_width="match_parent"
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:visibility="visible"
-                                android:weightSum="10"
                                 android:layout_marginTop="5dp"
+                                android:text="Business"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                >
-
-                                <TextView
-                                    style="@style/TextViewStyle"
-                                    android:layout_weight="3"
-                                    android:text="Business"
-                                    android:textColor="@color/black"
-                                    android:textSize="16sp"/>
-
+                                app:layout_constraintTop_toTopOf="parent"/>
 
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/tv_business_name_"
                                     style="@style/TextViewStyle"
-                                    android:layout_weight="5"
                                     tools:text="Business"
+                                    android:layout_marginStart="2dp"
+                                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                                    app:layout_constraintTop_toTopOf="parent"
                                     android:textSize="16sp"/>
 
-
-                            </LinearLayout>
 
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -319,11 +308,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:text="Product Name"
+                                android:text="Category"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/ll_business_name" />
+                                app:layout_constraintTop_toBottomOf="@+id/tv_business_name_" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textView8"
                                 android:layout_width="0dp"
@@ -344,7 +333,7 @@
                                 android:textSize="14sp"
                                 android:layout_marginStart="2dp"
                                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                                app:layout_constraintTop_toBottomOf="@+id/ll_business_name"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_business_name_"
                                 tools:text="JWTIY" />
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -656,6 +645,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_reject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Reject"

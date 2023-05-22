@@ -16,6 +16,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.kinda.alert.KAlertDialog;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -48,7 +50,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class AllOrdersDetailsActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class AllOrdersDetailsActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     RecyclerView recyclerView;
     AllOrdersAdapter allOrdersAdapter;
@@ -56,7 +58,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
     RecyclerView.LayoutManager layoutManager;
     private Toolbar toolbar;
     private TextView tvNoData;
-    String tempUseType= "";
+    String tempUseType = "";
 
     private AutoCompleteTextView ll_status_type;
     private EditText date;
@@ -64,6 +66,8 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
     final Calendar myCalendar = Calendar.getInstance();
 
     FloatingActionButton fab_filter;
+
+    ImageView imgFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +78,16 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
         getSupportActionBar().setTitle("Request Orders");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initViews();
+/*
         fab_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showFilterDialog(view);
+            }
+        });
+*/
+
+        imgFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showFilterDialog(view);
@@ -85,7 +98,8 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
         layoutManager = new LinearLayoutManager(AllOrdersDetailsActivity.this);
         recyclerView.setLayoutManager(layoutManager);
     }
-    public void getData(String email,String userType,String statusType) {
+
+    public void getData(String email, String userType, boolean isFromChangeStatus) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -101,8 +115,8 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
                 .build();
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-        String sDate1=date.getText().toString();
-        Date date1= null;
+        String sDate1 = date.getText().toString();
+        Date date1 = null;
         try {
             date1 = new SimpleDateFormat("yyyy-MM-dd").parse(sDate1);
         } catch (ParseException e) {
@@ -112,7 +126,14 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
         String strDate = dateFormat.format(date1);
 
         Call<AllOrdersResponse> userCall;
-        userCall = apiInterface.getAllOrders(email,userType,ll_status_type.getText().toString(),strDate,"","","","");
+        if (isFromChangeStatus) {
+
+            userCall = apiInterface.getAllOrders(email, userType, "", strDate, "", "", "", "");
+
+        } else {
+            userCall = apiInterface.getAllOrders(email, userType, ll_status_type.getText().toString(), strDate, "", "", "", "");
+
+        }
 
         userCall.enqueue(new Callback<AllOrdersResponse>() {
             @Override
@@ -127,12 +148,12 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
 
 
                         data = response.body().getData();
-                        if (data.size()>0){
+                        if (data.size() > 0) {
                             recyclerView.setVisibility(View.VISIBLE);
-                            allOrdersAdapter = new AllOrdersAdapter(data,AllOrdersDetailsActivity.this);
+                            allOrdersAdapter = new AllOrdersAdapter(data, AllOrdersDetailsActivity.this);
                             recyclerView.setAdapter(allOrdersAdapter);
 
-                        }else {
+                        } else {
 
                             tvNoData.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);
@@ -142,12 +163,16 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
                         MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
 
                         MyUtilities.showToast(AllOrdersDetailsActivity.this, response.body().getMessage());
+                        recyclerView.setVisibility(View.GONE);
+
                     }
 
                 } else {
 
                     MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
                     MyUtilities.showToast(AllOrdersDetailsActivity.this, MyUtilities.KAlertDialogTitleError);
+                    recyclerView.setVisibility(View.GONE);
+
 
                 }
             }
@@ -156,7 +181,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
             @Override
             public void onFailure(Call<AllOrdersResponse> call, Throwable t) {
 
-                MyUtilities.showToast(AllOrdersDetailsActivity.this,MyUtilities.KAlertDialogTitleError);
+                MyUtilities.showToast(AllOrdersDetailsActivity.this, MyUtilities.KAlertDialogTitleError);
                 MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
 
             }
@@ -168,26 +193,28 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
     protected void onResume() {
         super.onResume();
 
-        if(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Dealer")
-        || SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Material Supplier")
-        || SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Developer")){
-            tempUseType= "DEALER";
-        }else if (SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Individual")
-                || SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Retailer")){
-            tempUseType= "Retailer";
+        if (SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Dealer")
+                || SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Material Supplier")
+                || SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Developer")) {
+            tempUseType = "DEALER";
+        } else if (SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Individual")
+                || SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_USER_TYPE).equals("Retailer")) {
+            tempUseType = "Retailer";
         }
-        getData(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this,MyUtilities.PREF_EMAIL),tempUseType,"");
+        getData(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_EMAIL), tempUseType, false);
 
     }
 
-    public void onClickUpdateOrderStatus(String orderId,String status){
+    public void onClickUpdateOrderStatus(String orderId, String status) {
 
-        changeStatus(orderId,status);
+        MyUtilities.showAlertDialog(AllOrdersDetailsActivity.this, KAlertDialog.PROGRESS_TYPE, MyUtilities.KAlertDialogTitleLoding);
+
+        changeStatus(orderId, status);
 
     }
 
 
-    public void changeStatus(String orderId,String status) {
+    public void changeStatus(String orderId, String status) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -205,7 +232,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
         JsonObject paramObject = new JsonObject();
-        paramObject.addProperty("ORD_ID",  orderId);
+        paramObject.addProperty("ORD_ID", orderId);
         paramObject.addProperty("STATUS", status);
 
         Call<ServerResponse> userCall = apiInterface.changeOrderStatus(String.valueOf(paramObject));
@@ -220,18 +247,22 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
 
 
                         //MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
-                        getData(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this,MyUtilities.PREF_EMAIL),tempUseType,"");
+                        MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
+                        getData(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_EMAIL), tempUseType, true);
 
                     } else {
                         MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
 
                         MyUtilities.showToast(AllOrdersDetailsActivity.this, MyUtilities.KAlertDialogTitleError);
+                        MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
+
                     }
 
                 } else {
 
                     MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
                     MyUtilities.showToast(AllOrdersDetailsActivity.this, MyUtilities.KAlertDialogTitleError);
+                    MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
 
                 }
             }
@@ -240,15 +271,17 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
             @Override
             public void onFailure(Call<ServerResponse> call, Throwable t) {
 
-                MyUtilities.showToast(AllOrdersDetailsActivity.this,MyUtilities.KAlertDialogTitleError);
+                MyUtilities.showToast(AllOrdersDetailsActivity.this, MyUtilities.KAlertDialogTitleError);
                 MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
 
             }
         });
     }
+
     private void initViews() {
         ll_status_type = findViewById(R.id.ll_status_type);
         fab_filter = findViewById(R.id.filter_fab);
+        imgFilter = findViewById(R.id.img_filter);
         date = findViewById(R.id.date);
         ll_status_type.setText(getResources().getStringArray(R.array.order_status_array)[0]);
         date.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
@@ -274,7 +307,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 try {
-                    getData(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this,MyUtilities.PREF_EMAIL),tempUseType,"");
+                    getData(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_EMAIL), tempUseType, false);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -287,7 +320,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         date.setText(datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth());
         try {
-            getData(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this,MyUtilities.PREF_EMAIL),tempUseType,"");
+            getData(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_EMAIL), tempUseType, false);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -311,7 +344,6 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
         //EditText editText = customLayout.findViewById(R.id.editText);
 
 
-
         AlertDialog dialog = builder.create();
         dialog.show();
 
@@ -327,7 +359,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
 
                 String brandName = dialogBrandEt.getText().toString();
 
-                getDataWithFilterResults(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this,MyUtilities.PREF_EMAIL),tempUseType,brandName,businessName,productName,location);
+                getDataWithFilterResults(SharedPreferenceUtils.getValue(AllOrdersDetailsActivity.this, MyUtilities.PREF_EMAIL), tempUseType, brandName, businessName, productName, location);
 
                 dialog.cancel();
             }
@@ -335,7 +367,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
 
     }
 
-    public void getDataWithFilterResults(String email,String userType,String brand_name,String b_name,String s_name,String city) {
+    public void getDataWithFilterResults(String email, String userType, String brand_name, String b_name, String s_name, String city) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -351,8 +383,8 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
                 .build();
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-        String sDate1=date.getText().toString();
-        Date date1= null;
+        String sDate1 = date.getText().toString();
+        Date date1 = null;
         try {
             date1 = new SimpleDateFormat("yyyy-MM-dd").parse(sDate1);
         } catch (ParseException e) {
@@ -362,7 +394,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
         String strDate = dateFormat.format(date1);
 
         Call<AllOrdersResponse> userCall;
-        userCall = apiInterface.getAllOrders(email,userType,ll_status_type.getText().toString(),strDate,brand_name,b_name,s_name,city);
+        userCall = apiInterface.getAllOrders(email, userType, ll_status_type.getText().toString(), strDate, brand_name, b_name, s_name, city);
 
         userCall.enqueue(new Callback<AllOrdersResponse>() {
             @Override
@@ -377,12 +409,12 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
 
 
                         data = response.body().getData();
-                        if (data.size()>0){
+                        if (data.size() > 0) {
                             recyclerView.setVisibility(View.VISIBLE);
-                            allOrdersAdapter = new AllOrdersAdapter(data,AllOrdersDetailsActivity.this);
+                            allOrdersAdapter = new AllOrdersAdapter(data, AllOrdersDetailsActivity.this);
                             recyclerView.setAdapter(allOrdersAdapter);
 
-                        }else {
+                        } else {
 
                             tvNoData.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);
@@ -400,6 +432,8 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
 
                     MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
                     MyUtilities.showToast(AllOrdersDetailsActivity.this, MyUtilities.KAlertDialogTitleError);
+                    recyclerView.setVisibility(View.GONE);
+
 
                 }
             }
@@ -408,7 +442,7 @@ public class AllOrdersDetailsActivity extends AppCompatActivity implements DateP
             @Override
             public void onFailure(Call<AllOrdersResponse> call, Throwable t) {
 
-                MyUtilities.showToast(AllOrdersDetailsActivity.this,MyUtilities.KAlertDialogTitleError);
+                MyUtilities.showToast(AllOrdersDetailsActivity.this, MyUtilities.KAlertDialogTitleError);
                 MyUtilities.cancelAlertDialog(AllOrdersDetailsActivity.this);
 
             }

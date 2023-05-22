@@ -9,6 +9,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -61,6 +62,7 @@ public class ConsumerAllOrdersDetailsActivity extends AppCompatActivity implemen
     private String tempUseType= "";
 
     FloatingActionButton fab_filter;
+    ImageView imgFilter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +72,14 @@ public class ConsumerAllOrdersDetailsActivity extends AppCompatActivity implemen
         getSupportActionBar().setTitle("Request Orders");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initViews();
-        fab_filter.setOnClickListener(new View.OnClickListener() {
+       /* fab_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showFilterDialog(view);
+            }
+        });
+*/
+        imgFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showFilterDialog(view);
@@ -180,6 +189,7 @@ public class ConsumerAllOrdersDetailsActivity extends AppCompatActivity implemen
     private void initViews() {
         ll_status_type = findViewById(R.id.ll_status_type);
         fab_filter = findViewById(R.id.filter_fab);
+        imgFilter = findViewById(R.id.img_filter);
         date = findViewById(R.id.date);
         ll_status_type.setText(getResources().getStringArray(R.array.order_status_array)[0]);
         date.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));

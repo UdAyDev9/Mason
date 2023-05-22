@@ -17,8 +17,11 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kinda.alert.KAlertDialog;
+
 import java.util.List;
 
+import narasimhaa.com.mitraservice.AddOthersActivity;
 import narasimhaa.com.mitraservice.AllOrdersDetailsActivity;
 import narasimhaa.com.mitraservice.AllProductsListActivityCopy;
 import narasimhaa.com.mitraservice.Model.MaterialFilter.DataItem;
@@ -93,6 +96,12 @@ public class AllOrdersAdapter extends RecyclerView.Adapter<AllOrdersAdapter.MyRe
                     holder.tv_delivered.setBackground(ContextCompat.getDrawable(context, R.drawable.curved_shape2));
                     holder.tv_delivered.setTextColor(ContextCompat.getColor(context, R.color.white));
                     break;
+
+                case MyUtilities.ORDER_STATUS_REJECTED:
+
+                    holder.tv_reject.setBackground(ContextCompat.getDrawable(context, R.drawable.curved_shape2));
+                    holder.tv_reject.setTextColor(ContextCompat.getColor(context, R.color.white));
+                    break;
                 default:
                     return;
 
@@ -114,7 +123,8 @@ public class AllOrdersAdapter extends RecyclerView.Adapter<AllOrdersAdapter.MyRe
     public class MyResultsViewHolder extends RecyclerView.ViewHolder {
 
 
-        private TextView tvMaterialType, tvBusinessName, tv_door_delivery, tvOrderId, tvBrandNames, tv_ordered_on, textView7, tv_sub_category, tv_shape, tv_size, tv_mrp, tv_offer_price, tv_pending, tv_quoted, tv_processed, tv_delivered,tv_order_city,tv_perimeter, tv_length, tv_weight, tv_thickness;
+        private TextView tvMaterialType, tvBusinessName, tv_door_delivery, tvOrderId, tvBrandNames, tv_ordered_on, textView7, tv_sub_category, tv_shape, tv_size, tv_mrp, tv_offer_price, tv_pending, tv_quoted, tv_processed, tv_delivered,
+        tv_reject,tv_order_city,tv_perimeter, tv_length, tv_weight, tv_thickness;
         private Button update_btn;
         private AppCompatTextView txt_totalProductPrice, tvQuantity, plus, minus;
         private LinearLayout moreDetailsLayout, quantityLayout;
@@ -140,6 +150,7 @@ public class AllOrdersAdapter extends RecyclerView.Adapter<AllOrdersAdapter.MyRe
             tv_quoted = itemView.findViewById(R.id.tv_quoted);
             tv_processed = itemView.findViewById(R.id.tv_processed);
             tv_delivered = itemView.findViewById(R.id.tv_delivered);
+            tv_reject = itemView.findViewById(R.id.tv_reject);
             checkbox = (CheckBox) itemView.findViewById(R.id.checkbox);
             tv_perimeter = itemView.findViewById(R.id.tv_perimeter);
             tv_length    = itemView.findViewById(R.id.tv_length);
@@ -173,6 +184,13 @@ public class AllOrdersAdapter extends RecyclerView.Adapter<AllOrdersAdapter.MyRe
                 @Override
                 public void onClick(View v) {
                     updateOrderStatus(list.get(getAdapterPosition()).getORD_ID(), MyUtilities.ORDER_STATUS_DELIVERED);
+                }
+            });
+
+            tv_reject.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    updateOrderStatus(list.get(getAdapterPosition()).getORD_ID(), MyUtilities.ORDER_STATUS_REJECTED);
                 }
             });
 

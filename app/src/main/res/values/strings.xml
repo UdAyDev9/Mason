@@ -15,7 +15,7 @@
     <string name="title_AddnewMyservice">Add new My Service</string>
     <string name="title_AddMyservice">Add Service</string>
     <string name="title_update_Myservice">Update Service</string>
-    <string name="title_add_material">Add Product</string>
+    <string name="title_add_material">Add Material</string>
     <string name="title_add_shape">Add Shape</string>
     <string name="title_add_sub_category">Add SubCategory</string>
     <string name="title_add_perimeter">Add Perimeter</string>
@@ -24,7 +24,7 @@
     <string name="title_add_perimeter_length_weight">Add Perimeter,Length,Weight</string>
     <string name="title_add_others">Add Others</string>
     <string name="title_ServiceUpdate">Update Service</string>
-    <string name="title_material_update">Update Product</string>
+    <string name="title_material_update">Update Material</string>
     <string name="title_UpdateProfile">My Profile</string>
     <string name="title_Registration">Registration</string>
     <string name="are_you_sure_available">Are you sure Available</string>
@@ -118,6 +118,7 @@
         <item>Quoted</item>
         <item>Processed</item>
         <item>Delivered</item>
+        <item>Rejected</item>
         <!--
                 <item>Material Supplier</item>
         -->

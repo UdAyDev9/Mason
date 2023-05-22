@@ -127,6 +127,8 @@ public class MyUtilities {
 	public static final String ORDER_STATUS_PROCESSED = "Processed";
 	public static final String ORDER_STATUS_DELIVERED = "Delivered";
 
+	public static final String ORDER_STATUS_REJECTED = "Rejected";
+
 
 	public static void showAlertDialog(Context context,int type,String title){
 
