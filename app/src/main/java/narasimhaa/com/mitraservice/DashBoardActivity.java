@@ -168,11 +168,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         getData();
         getStaffData();
 
-        tabLayout.addTab(tabLayout.newTab().setText("Developers"));
+        //tabLayout.addTab(tabLayout.newTab().setText("Developers"));
         tabLayout.addTab(tabLayout.newTab().setText("Materials"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final DashboardTabsAdapater adapter = new DashboardTabsAdapater(this, getSupportFragmentManager(), tabLayout.getTabCount());
+        //final DashboardTabsAdapater adapter = new DashboardTabsAdapater(this, getSupportFragmentManager(), tabLayout.getTabCount());
+        final DashboardTabsAdapater adapter = new DashboardTabsAdapater(this, getSupportFragmentManager(), 1);
         viewPager.setAdapter(adapter);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

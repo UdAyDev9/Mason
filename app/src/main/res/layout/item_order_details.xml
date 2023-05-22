@@ -658,7 +658,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Remove"
+                android:text="Reject"
                 android:drawableEnd="@drawable/ic_baseline_close_24"
                 android:textSize="12sp"
                 android:padding="8dp"
@@ -747,6 +747,5 @@
 
             </LinearLayout>
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

@@ -273,6 +273,7 @@
                 android:layout_below="@+id/edt_search_city"
                 android:layout_alignParentBottom="true"
                 android:orientation="vertical"
+                tools:itemCount="2"
                 tools:listitem="@layout/item_places"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -317,6 +318,7 @@
                 android:layout_below="@+id/edt_search_city"
                 android:layout_alignParentBottom="true"
                 android:orientation="vertical"
+                tools:itemCount="0"
                 tools:listitem="@layout/item_places"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -347,6 +349,7 @@
                 android:textColor="@color/colorPrimary"
                 android:fontFamily="sans-serif"
                 />
+
             <LinearLayout
                 android:id="@+id/ll_user_type"
                 android:layout_width="match_parent"
@@ -354,7 +357,6 @@
                 android:orientation="vertical"
                 android:layout_marginTop="2dp"
                 android:background="@drawable/spinner_shape_outline"
-
                 >
 
 

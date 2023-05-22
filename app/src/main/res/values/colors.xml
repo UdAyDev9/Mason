@@ -86,6 +86,7 @@
   <!--     60000000 -->
         <color name="table_shadow_start">#2d75ae</color>
     <color name="table_shadow_end">#00000000</color>
-    
+
+  <color name="color_select_add_material_text">#1e88e5</color>
 
 </resources>

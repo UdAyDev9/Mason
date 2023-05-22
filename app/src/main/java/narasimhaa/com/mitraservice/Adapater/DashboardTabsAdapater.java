@@ -24,10 +24,10 @@ public class DashboardTabsAdapater extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0:
+            case 1:
                 DevelopersFragment developersFragment = new DevelopersFragment();
                 return developersFragment;
-            case 1:
+            case 0:
                 MaterialFragment materialFragment = new MaterialFragment();
                 return materialFragment;
 
