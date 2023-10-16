@@ -94,7 +94,7 @@ public class MyUtilities {
 	static KAlertDialog pDialog;
 	static Context context;
 	public static final String KAlertDialogTitleLoding= "Loading...";
-	public static final String KAlertDialogTitleError =  "Please check your connection or try again in sometime.";
+	public static final String KAlertDialogTitleError =  "Something went wrong! please try again in sometime.";
 	public static final String KAlertDialogTitleSwitch =  "Could not update status. Please try again in sometime";
 	public static final String TOAST_SERVICE_NOT_ADDED_YET = "It seems Developer Service not added yet. Please add Developer Service.";
 	public static final String TOAST_MATERIAL_NOT_ADDED_YET = "It seems no Materials not added yet. Please add Material.";
@@ -111,6 +111,7 @@ public class MyUtilities {
 	public static final String PREF_SERVICE_SEARCH = "PREF_SERVICE_SEARCH";
 	public static final String PREF_MATERIAL_BUSINESS_TYPE = "PREF_MATERIAL_BUSINESS_TYPE";
 	public static final String PREF_CITY_SEARCH = "PREF_CITY_SEARCH";
+	public static final String PREF_IS_FROM_ADMIN = "PREF_IS_FROM_ADMIN";
 	public static final String PREF_BRAND_SEARCH = "PREF_BRAND_SEARCH";
 	public static final String INTENT_KEY_MATERIAL_TYPE = "INTENT_KEY_MATERIAL_TYPE";
 	public static final String INTENT_KEY_BUSINESS_TYPE = "INTENT_KEY_BUSINESS_TYPE";
@@ -1217,6 +1218,6 @@ public static void cancelAlertDialog(Context context){
 		return formatter.format(calendar.getTime());
 	}
 
-
-
+	public static final String CONST_YES = "YES";
+	public static final String CONST_NO = "NO";
 }

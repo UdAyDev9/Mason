@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.kinda.alert.KAlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,9 @@ public class MaterialFilteredResultsActivity extends AppCompatActivity {
     }
 
     public void getData(String service,String city,String businessType) {
+
+        MyUtilities.showAlertDialog(MaterialFilteredResultsActivity.this, KAlertDialog.PROGRESS_TYPE, MyUtilities.KAlertDialogTitleLoding);
+
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -88,7 +92,7 @@ public class MaterialFilteredResultsActivity extends AppCompatActivity {
                     if (response.body().isStatus() == true) {
 
 
-                        //MyUtilities.cancelAlertDialog(MaterialFilteredResultsActivity.this);
+                        MyUtilities.cancelAlertDialog(MaterialFilteredResultsActivity.this);
 
 
                         data = response.body().getData();
@@ -106,7 +110,8 @@ public class MaterialFilteredResultsActivity extends AppCompatActivity {
                     } else {
                         MyUtilities.cancelAlertDialog(MaterialFilteredResultsActivity.this);
 
-                        MyUtilities.showToast(MaterialFilteredResultsActivity.this, MyUtilities.KAlertDialogTitleError);
+                        MyUtilities.showToast(MaterialFilteredResultsActivity.this, response.body().getMessage());
+
                     }
 
                 } else {
@@ -133,8 +138,13 @@ public class MaterialFilteredResultsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        getData(SharedPreferenceUtils.getValue(MaterialFilteredResultsActivity.this,MyUtilities.PREF_SERVICE_SEARCH),SharedPreferenceUtils.getValue(MaterialFilteredResultsActivity.this,MyUtilities.PREF_CITY_SEARCH),SharedPreferenceUtils.getValue(MaterialFilteredResultsActivity.this,MyUtilities.PREF_MATERIAL_BUSINESS_TYPE));
-       // getData(SharedPreferenceUtils.getValue(MaterialFilteredResultsActivity.this,MyUtilities.PREF_SERVICE_SEARCH),SharedPreferenceUtils.getValue(MaterialFilteredResultsActivity.this,MyUtilities.PREF_CITY_SEARCH),SharedPreferenceUtils.getValue(MaterialFilteredResultsActivity.this,MyUtilities.PREF_MATERIAL_BUSINESS_TYPE),SharedPreferenceUtils.getValue(MaterialFilteredResultsActivity.this,MyUtilities.PREF_BRAND_SEARCH));
+        if (MyUtilities.isNetworkAvailable(MaterialFilteredResultsActivity.this)) {
+
+            getData(SharedPreferenceUtils.getValue(MaterialFilteredResultsActivity.this,MyUtilities.PREF_SERVICE_SEARCH),SharedPreferenceUtils.getValue(MaterialFilteredResultsActivity.this,MyUtilities.PREF_CITY_SEARCH),SharedPreferenceUtils.getValue(MaterialFilteredResultsActivity.this,MyUtilities.PREF_MATERIAL_BUSINESS_TYPE));
+        } else {
+            MyUtilities.showToast(MaterialFilteredResultsActivity.this, getString(R.string.please_check_your_internet_connection));
+
+        }              // getData(SharedPreferenceUtils.getValue(MaterialFilteredResultsActivity.this,MyUtilities.PREF_SERVICE_SEARCH),SharedPreferenceUtils.getValue(MaterialFilteredResultsActivity.this,MyUtilities.PREF_CITY_SEARCH),SharedPreferenceUtils.getValue(MaterialFilteredResultsActivity.this,MyUtilities.PREF_MATERIAL_BUSINESS_TYPE),SharedPreferenceUtils.getValue(MaterialFilteredResultsActivity.this,MyUtilities.PREF_BRAND_SEARCH));
 
     }
 }

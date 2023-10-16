@@ -22,7 +22,7 @@ import retrofit2.http.Query;
 
 public interface ApiInterface {
 
-    String URL_BASE = "http://65.1.178.54/app/index.php/";
+    String URL_BASE = "http://3.111.64.178/app/";
 
     @POST("Users/login.php")
     Call<ServerResponse> getLoginResponsee(@Body String body);
@@ -102,10 +102,13 @@ public interface ApiInterface {
      Call<FilterResponseFull> getFilteredList(@Query("SERVICE_NAME") String SERVICE_NAME, @Query("CITY") String CITY,@Query("SIZE") String SIZE);
  */
     @GET("Services/getFilteredServiceTypePersons")
-    Call<MaterialFilterResponseFull> getMaterialFilteredList(@Query("SERVICE_TYPE") String SERVICE_NAME, @Query("CITY") String CITY, @Query("BUSINESS_TYPE") String BUSINESS_TYPE);
+    Call<MaterialFilterResponseFull> getMaterialFilteredList
+    (@Query("SERVICE_TYPE") String SERVICE_NAME,
+     @Query("CITY") String CITY, @Query("BUSINESS_TYPE") String BUSINESS_TYPE);
 
     @GET("Services/getAllActiveServiceTypes")
-    Call<MaterialDevelopersServerResponse> getMaterialDevelopersList(@Query("EMAIL_ID") String EMAIL_ID);
+    Call<MaterialDevelopersServerResponse> getMaterialDevelopersList(
+            @Query("EMAIL_ID") String EMAIL_ID);
 
     @POST("Staff/changeStatus")
     Call<ServerResponse> changeStatus(@Body String body);
@@ -113,10 +116,8 @@ public interface ApiInterface {
     @POST("Users/changeStatus")
     Call<ServerResponse> changeUserStatus(@Body String body);
 
-
     @POST("Users/deleteImage")
     Call<ServerResponse> deleteImage(@Body String body);
-
 
     @POST("Users/register")
     Call<ServerResponse> registerUser(@Body String body);
@@ -205,5 +206,13 @@ public interface ApiInterface {
 
     @POST("Admin/deleteLength")
     Call<ServicesResponseSizeBrand> deleteWeight(@Body String body);
+
+    @POST("Users/forgotPasswordNew")
+    Call<ServerResponse> performForgetPasswordNew(@Body String body);
+
+    @POST("Users/updatePassword")
+    Call<ServerResponse> performUpdatePassword(@Body String body);
+
+
 
 }

@@ -108,7 +108,7 @@
     <string-array name="user_types_array">
         <item>Dealer</item>
         <item>Retailer</item>
-<!--
+        <!--
         <item>Material Supplier</item>
 -->
     </string-array>

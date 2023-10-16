@@ -39,6 +39,8 @@ public class SearchResultsDisplayActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView tvNoData;
 
+    private boolean isFromAdmin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,19 @@ public class SearchResultsDisplayActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Available");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (getIntent().getExtras() != null) {
+
+            if (getIntent().getExtras().getString(MyUtilities.PREF_IS_FROM_ADMIN) != null) {
+
+                if(getIntent().getExtras().getString(MyUtilities.PREF_IS_FROM_ADMIN).equalsIgnoreCase(MyUtilities.CONST_YES)){
+                    isFromAdmin = true;
+                }else {
+                    isFromAdmin = false;
+                }
+
+            }
+        }
 
         recyclerView = findViewById(R.id.recycler_view);
         tvNoData = findViewById(R.id.tv_no_data);
@@ -95,7 +110,7 @@ public class SearchResultsDisplayActivity extends AppCompatActivity {
                         data = response.body().getData().getDATA();
                         if (data.size()>0){
                             recyclerView.setVisibility(View.VISIBLE);
-                            resultsAdapter = new ResultsAdapter(data,SearchResultsDisplayActivity.this);
+                            resultsAdapter = new ResultsAdapter(data,SearchResultsDisplayActivity.this,isFromAdmin);
                             recyclerView.setAdapter(resultsAdapter);
 
                         }else {

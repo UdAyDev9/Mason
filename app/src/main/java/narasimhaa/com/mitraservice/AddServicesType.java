@@ -52,7 +52,8 @@ public class AddServicesType extends AppCompatActivity {
                 servicestr = et_servicename.getText().toString();
 
                 addservicename(servicestr);
-                }
+
+            }
 
 
 

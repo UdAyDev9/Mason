@@ -106,17 +106,17 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
         Menu menu = navigationView.getMenu();
 
-        if (SharedPreferenceUtils.getValue(DashBoardActivity.this, MyUtilities.PREF_USER_TYPE).equals("Retailer")) {
+        if (SharedPreferenceUtils.getValue(DashBoardActivity.this, MyUtilities.PREF_USER_TYPE).equals("Retailer") || SharedPreferenceUtils.getValue(DashBoardActivity.this, MyUtilities.PREF_USER_TYPE).equals("Customer")) {
             navigationView.getMenu().clear();
-            navigationView.inflateMenu(R.menu.nav_menu_for_user);
+            navigationView.inflateMenu(R.menu.nav_menu_for_admin);
             switchChangeStatus.setVisibility(View.INVISIBLE);
             tabLayout.setVisibility(View.VISIBLE);
             //viewPager.setVisibility(View.GONE);
             //tabLayout.setVisibility(View.GONE);
         } else if (SharedPreferenceUtils.getValue(DashBoardActivity.this, MyUtilities.PREF_USER_TYPE).equals("Developer")) {
             navigationView.getMenu().clear();
-            navigationView.inflateMenu(R.menu.activity_dash_board_drawer);
-            switchChangeStatus.setVisibility(View.GONE);
+            navigationView.inflateMenu(R.menu.activity_dash_board_drawer_for_developer);
+            switchChangeStatus.setVisibility(View.VISIBLE);
             MenuItem nav_add_developer_or_material = menu.findItem(R.id.AddMyService);
             nav_add_developer_or_material.setTitle("Add Service");
             isDeveloper = true;
@@ -168,8 +168,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         getData();
         getStaffData();
 
-        //tabLayout.addTab(tabLayout.newTab().setText("Developers"));
-        tabLayout.addTab(tabLayout.newTab().setText("Materials"));
+        tabLayout.addTab(tabLayout.newTab().setText("Services"));
+        //tabLayout.addTab(tabLayout.newTab().setText("Materials"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         //final DashboardTabsAdapater adapter = new DashboardTabsAdapater(this, getSupportFragmentManager(), tabLayout.getTabCount());
@@ -325,6 +325,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         if (id == R.id.MYProfile) {
 
             Intent i = new Intent(DashBoardActivity.this, MyprofileActivity.class);
+            startActivity(i);
+
+        } else if (id == R.id.navServiceRequests) {
+
+            Intent i = new Intent(DashBoardActivity.this,  AdminServicesRequestsActivity.class);
             startActivity(i);
 
         } else if (id == R.id.nav_images) {
@@ -686,7 +691,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                     if (response.body().getStatus() == true) {
 
-                        switchChangeStatus.setVisibility(View.GONE);
+                        if (isDeveloper)
+                            switchChangeStatus.setVisibility(View.VISIBLE);
+                        else
+                            switchChangeStatus.setVisibility(View.GONE);
 
                         MyUtilities.cancelAlertDialog(DashBoardActivity.this);
 
@@ -697,13 +705,13 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (homePageBeanData.getSTATUS().equals("ACTIVE")) {
 
                             switchChangeStatus.setChecked(true);
-                            availableTv.setVisibility(View.GONE);
+                            availableTv.setVisibility(View.VISIBLE);
                             availableTv.setText("AVAILABLE");
 
                         } else {
 
                             switchChangeStatus.setChecked(false);
-                            availableTv.setVisibility(View.GONE);
+                            availableTv.setVisibility(View.VISIBLE);
                             availableTv.setText("UNAVAILABLE");
 
                         }
@@ -719,7 +727,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         //MyUtilities.showToast(DashBoardActivity.this, MyUtilities.KAlertDialogTitleError);
 
-                        switchChangeStatus.setVisibility(View.GONE);
+                        if (isDeveloper)
+                            switchChangeStatus.setVisibility(View.VISIBLE);
+                        else
+                            switchChangeStatus.setVisibility(View.GONE);
+
                     }
 
 

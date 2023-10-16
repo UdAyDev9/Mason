@@ -6,9 +6,10 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -16,9 +17,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.kinda.alert.KAlertDialog;
 
+import narasimhaa.com.mitraservice.Model.MaterialDevelopers.ServicesResponseSizeBrand;
 import narasimhaa.com.mitraservice.Model.ServerResponse;
 import narasimhaa.com.mitraservice.Utility.MyUtilities;
-import narasimhaa.com.mitraservice.Utility.SharedPreferenceUtils;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -28,59 +29,59 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class ValidateOtpActivity extends AppCompatActivity {
+public class UpdatePasswordActivity extends AppCompatActivity {
+
+    private EditText editTextConfirmPassword;
+    private EditText editTextPassword;
+    private EditText editTextOTP;
+    private Button buttonSubmit;
     KAlertDialog pDialog;
     private Toolbar toolbar;
-    private OtpEntryEditText otpEntryEditText;
-    private String mobile = "";
+    private  String emailMobileNo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_validate_otp);
+        setContentView(R.layout.activity_update_password);
+        editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        editTextOTP = findViewById(R.id.editTextOTP);
+        buttonSubmit = findViewById(R.id.buttonSubmit);
         toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar_extra);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Mr Mason");
+        getSupportActionBar().setTitle("Update Password");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        emailMobileNo = getIntent().getStringExtra("EMAIL_MOBILE");
         pDialog = new KAlertDialog(this, KAlertDialog.PROGRESS_TYPE);
 
-        mobile = getIntent().getStringExtra("KEY_MOBILE_NO");
-        otpEntryEditText = findViewById(R.id.et_otp);
-
-        otpEntryEditText.addTextChangedListener(new TextWatcher() {
+        buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onClick(View v) {
+                String confirmPassword = editTextConfirmPassword.getText().toString();
+                String newPassword = editTextPassword.getText().toString();
+                String otp = editTextOTP.getText().toString();
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-                if (s.length() == 6) {
-
-                    validateOtpRequest(mobile,Integer.parseInt(s.toString()));
-
-                }else {
-
-                    //Toast.makeText(ValidateOtpActivity.this, "Enter full otp", Toast.LENGTH_SHORT).show();
-
+                if (newPassword.isEmpty() || confirmPassword.isEmpty() || otp.isEmpty()) {
+                    Toast.makeText(UpdatePasswordActivity.this, "Please fill all details", Toast.LENGTH_SHORT).show();
+                } else if (!newPassword.equals(confirmPassword)) {
+                    Toast.makeText(UpdatePasswordActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                } else {
+                    validateOtpRequestForUpdatePassword(emailMobileNo, newPassword, otp);
                 }
-            }
 
+            }
         });
     }
 
-    private void validateOtpRequest(String mobile,int otp){
+    private void validateOtpRequestForUpdatePassword(String mobile,String newPassword,String otp){
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         pDialog.setTitleText("Loading...");
         pDialog.setCancelable(false);
         //pDialog.show();
 
-        MyUtilities.showAlertDialog(ValidateOtpActivity.this, KAlertDialog.PROGRESS_TYPE,MyUtilities.KAlertDialogTitleLoding);
+        MyUtilities.showAlertDialog(UpdatePasswordActivity.this, KAlertDialog.PROGRESS_TYPE,MyUtilities.KAlertDialogTitleLoding);
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -100,11 +101,12 @@ public class ValidateOtpActivity extends AppCompatActivity {
         try {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("MOBILE_NO", mobile);
+            jsonObject.addProperty("NEW_PASSWORD", newPassword);
             jsonObject.addProperty("OTP", otp);
 
             String jsonStr = String.valueOf(jsonObject);
 
-            Call<ServerResponse> userCall = apiInterface.otpValidate(jsonObject.toString());
+            Call<ServerResponse> userCall = apiInterface.performUpdatePassword(jsonObject.toString());
 
             userCall.enqueue(new Callback<ServerResponse>() {
                 @Override
@@ -113,13 +115,13 @@ public class ValidateOtpActivity extends AppCompatActivity {
                     if (response.body()!=null){
 
                         Log.d("responsee", "onResponse: " + response.body().getStatus());
-                        Log.e("responsee", "onResponse: " + response.body().getMsg());
 
                         if(response.body().getStatus()==true)
                         {
 
-                            MyUtilities.cancelAlertDialog(ValidateOtpActivity.this);
+                            MyUtilities.cancelAlertDialog(UpdatePasswordActivity.this);
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            Toast.makeText(UpdatePasswordActivity.this,"Password Updated. Please login again to continue ",Toast.LENGTH_LONG).show();
                             startActivity(intent);
                             finish();
 
@@ -127,17 +129,17 @@ public class ValidateOtpActivity extends AppCompatActivity {
                         }else{
 
 
-                            Toast.makeText(ValidateOtpActivity.this,"Invalid Otp",Toast.LENGTH_LONG).show();
+                            Toast.makeText(UpdatePasswordActivity.this,"Invalid Otp",Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                             finish();
-                            MyUtilities.cancelAlertDialog(ValidateOtpActivity.this);
+                            MyUtilities.cancelAlertDialog(UpdatePasswordActivity.this);
 
                         }
                     }else {
 
-                        //MyUtilities.showAlertDialog(ValidateOtpActivity.this,KAlertDialog.ERROR_TYPE,MyUtilities.KAlertDialogTitleError);
-                        MyUtilities.showToast(ValidateOtpActivity.this,MyUtilities.KAlertDialogTitleError);
+                        //MyUtilities.showAlertDialog(UpdatePasswordActivity.this,KAlertDialog.ERROR_TYPE,MyUtilities.KAlertDialogTitleError);
+                        MyUtilities.showToast(UpdatePasswordActivity.this,MyUtilities.KAlertDialogTitleError);
 
                     }
 
@@ -148,18 +150,18 @@ public class ValidateOtpActivity extends AppCompatActivity {
 
                     Log.e("erro", "onFailure: " + t.getMessage());
                     //pDialog.cancel();
-                    MyUtilities.showToast(ValidateOtpActivity.this,MyUtilities.KAlertDialogTitleError);
-                    MyUtilities.cancelAlertDialog(ValidateOtpActivity.this);
+                    MyUtilities.showToast(UpdatePasswordActivity.this,MyUtilities.KAlertDialogTitleError);
+                    MyUtilities.cancelAlertDialog(UpdatePasswordActivity.this);
 
-                    //MyUtilities.showAlertDialog(ValidateOtpActivity.this,KAlertDialog.ERROR_TYPE,MyUtilities.KAlertDialogTitleError);
+                    //MyUtilities.showAlertDialog(UpdatePasswordActivity.this,KAlertDialog.ERROR_TYPE,MyUtilities.KAlertDialogTitleError);
 
                 }
             });
         } catch (Exception e) {
             e.printStackTrace();
-            MyUtilities.showToast(ValidateOtpActivity.this,MyUtilities.KAlertDialogTitleError);
+            MyUtilities.showToast(UpdatePasswordActivity.this,MyUtilities.KAlertDialogTitleError);
 
-            //MyUtilities.showAlertDialog(ValidateOtpActivity.this,KAlertDialog.ERROR_TYPE,MyUtilities.KAlertDialogTitleError);
+            //MyUtilities.showAlertDialog(UpdatePasswordActivity.this,KAlertDialog.ERROR_TYPE,MyUtilities.KAlertDialogTitleError);
         }
 
 

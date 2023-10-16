@@ -10,8 +10,12 @@
             android:title="My Profile"
 
             />
+        <item
+            android:id="@+id/navServiceRequests"
+            android:icon="@drawable/ic_baseline_branding_watermark"
+            android:title="Service Requests"
 
-
+            />
 
         <item
             android:id="@+id/nav_add_brand_size"
@@ -65,7 +69,6 @@
             android:title="Dealer List"
             android:visible="true"
             />
-
 
     </group>
 

@@ -106,7 +106,6 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         bt_reg = (Button) findViewById(R.id.bt_reg);
         et_name = (EditText) findViewById(R.id.et_name);
-        serviceType = (Spinner) findViewById(R.id.sp_servicertype);
         populateCities();
 
         if (bundle != null) {
@@ -196,11 +195,13 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
 
         List<String> categories = new ArrayList<String>();
         //categories.add("Material Supplier");
-        //categories.add("Developer");
-        categories.add("Retailer");
+        categories.add("Developer");
+        categories.add("Customer");
+        categories.add("Admin");
+        /*categories.add("Retailer");
         categories.add("Admin");
         categories.add("Dealer");
-
+*/
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categories);
 
         //  dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

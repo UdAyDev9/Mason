@@ -2,24 +2,21 @@ package narasimhaa.com.mitraservice;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
@@ -32,8 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import narasimhaa.com.mitraservice.Adapater.PlacesAutoCompleteAdapter;
-import narasimhaa.com.mitraservice.Model.service.ServicesDataItem;
 import narasimhaa.com.mitraservice.Model.ServicesResponse;
+import narasimhaa.com.mitraservice.Model.service.ServicesDataItem;
 import narasimhaa.com.mitraservice.Utility.MyUtilities;
 import narasimhaa.com.mitraservice.Utility.SharedPreferenceUtils;
 import okhttp3.OkHttpClient;
@@ -46,7 +43,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
-public class DevelopersFragment extends Fragment {
+public class AdminServicesRequestsActivity extends AppCompatActivity {
 
 
     Spinner spinner_services_names;
@@ -59,8 +56,10 @@ public class DevelopersFragment extends Fragment {
 
     private PlacesAutoCompleteAdapter mAutoCompleteAdapterCities = null;
 
+    private Toolbar toolbar;
 
-    public DevelopersFragment() {
+
+    public AdminServicesRequestsActivity() {
         // Required empty public constructor
     }
 
@@ -68,19 +67,16 @@ public class DevelopersFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View myView = inflater.inflate(R.layout.fragment_developers, container, false);
-        spinner_services_names = myView.findViewById(R.id.spinner_services_names);
-        et_city = myView.findViewById(R.id.et_city);
-        recyclerViewCities = myView.findViewById(R.id.rv_cities);
+        setContentView(R.layout.activity_service_requests_admin);
+        spinner_services_names = findViewById(R.id.spinner_services_names);
+        et_city = findViewById(R.id.et_city);
+        recyclerViewCities = findViewById(R.id.rv_cities);
         et_city.addTextChangedListener(filterTextWatcherCities);
-        populateCities(myView);
+        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar_extra);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Service Requests");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        populateCities();
 
         getData();
 
@@ -98,7 +94,7 @@ public class DevelopersFragment extends Fragment {
 
             }
         });
-        btn_search = myView.findViewById(R.id.btn_search);
+        btn_search = findViewById(R.id.btn_search);
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,18 +104,19 @@ public class DevelopersFragment extends Fragment {
                     selectedCity = et_city.getText().toString();
 
                     if (!selectedService.equals("")&&!selectedCity.equals("")){
-                        Intent intent = new Intent(getContext(),SearchResultsDisplayActivity.class);
+                        Intent intent = new Intent(AdminServicesRequestsActivity.this, SearchResultsDisplayActivity.class);
                         intent.putExtra("SERVICE_SEARCH",selectedService);
                         intent.putExtra("CITY_SEARCH",selectedCity);
+                        intent.putExtra(MyUtilities.PREF_IS_FROM_ADMIN,MyUtilities.CONST_YES);
 
-                        SharedPreferenceUtils.setValue(getContext(),MyUtilities.PREF_SERVICE_SEARCH,selectedService);
-                        SharedPreferenceUtils.setValue(getContext(),MyUtilities.PREF_CITY_SEARCH,selectedCity);
-                        SharedPreferenceUtils.setValue(getContext(),MyUtilities.PREF_IS_FROM_ADMIN,MyUtilities.CONST_NO);
+                        SharedPreferenceUtils.setValue(AdminServicesRequestsActivity.this,MyUtilities.PREF_SERVICE_SEARCH,selectedService);
+                        SharedPreferenceUtils.setValue(AdminServicesRequestsActivity.this,MyUtilities.PREF_CITY_SEARCH,selectedCity);
+                        SharedPreferenceUtils.setValue(AdminServicesRequestsActivity.this,MyUtilities.PREF_IS_FROM_ADMIN,MyUtilities.CONST_YES);
 
-                        getContext().startActivity(intent);
+                        AdminServicesRequestsActivity.this.startActivity(intent);
 
                     }else {
-                        MyUtilities.showToast(getContext(),"Please select service and city");
+                        MyUtilities.showToast(AdminServicesRequestsActivity.this,"Please select service and city");
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -129,8 +126,8 @@ public class DevelopersFragment extends Fragment {
 
             }
         });
-        return myView;
     }
+
 
     public void getData() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -153,7 +150,7 @@ public class DevelopersFragment extends Fragment {
 
         JsonObject paramObject = new JsonObject();
         //paramObject.addProperty("EMAIL_ID", "krishna@appcare.co.in");
-        paramObject.addProperty("BOD_SEQ_NO", SharedPreferenceUtils.getValue(getContext(), MyUtilities.PREF_BOD_SEQ_NO));
+        paramObject.addProperty("BOD_SEQ_NO", SharedPreferenceUtils.getValue(AdminServicesRequestsActivity.this, MyUtilities.PREF_BOD_SEQ_NO));
         //paramObject.put("PASSWORD", "12345");
            /* paramObject.put("USERNAME", et_mno.getText().toString().trim());
             paramObject.put("PASSWORD", et_password.getText().toString().trim());
@@ -169,7 +166,7 @@ public class DevelopersFragment extends Fragment {
 
                     if (response.body().getStatus() == true){
 
-                        MyUtilities.cancelAlertDialog(getContext());
+                        MyUtilities.cancelAlertDialog(AdminServicesRequestsActivity.this);
                         dataList = response.body().getData();
 
                         List<String> tempList = new ArrayList<>();
@@ -179,21 +176,21 @@ public class DevelopersFragment extends Fragment {
                             tempList.add(dataList.get(i).getSERVICE_NAME());
 
                         }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AdminServicesRequestsActivity.this,
                                 android.R.layout.simple_spinner_item, tempList);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                         spinner_services_names.setAdapter(adapter);
                     }else {
-                        MyUtilities.cancelAlertDialog(getContext());
+                        MyUtilities.cancelAlertDialog(AdminServicesRequestsActivity.this);
 
-                        MyUtilities.showToast(getContext(),MyUtilities.KAlertDialogTitleError);
+                        MyUtilities.showToast(AdminServicesRequestsActivity.this,MyUtilities.KAlertDialogTitleError);
                     }
 
                 } else {
 
-                    MyUtilities.cancelAlertDialog(getContext());
-                    MyUtilities.showToast(getContext(),MyUtilities.KAlertDialogTitleError);
+                    MyUtilities.cancelAlertDialog(AdminServicesRequestsActivity.this);
+                    MyUtilities.showToast(AdminServicesRequestsActivity.this,MyUtilities.KAlertDialogTitleError);
 
                 }
             }
@@ -203,26 +200,26 @@ public class DevelopersFragment extends Fragment {
             public void onFailure(Call<ServicesResponse> call, Throwable t) {
 
                 Log.e("erro", "onFailure: " + t.getMessage());
-                MyUtilities.showToast(getContext(),MyUtilities.KAlertDialogTitleError);
-                MyUtilities.cancelAlertDialog(getContext());
+                MyUtilities.showToast(AdminServicesRequestsActivity.this,MyUtilities.KAlertDialogTitleError);
+                MyUtilities.cancelAlertDialog(AdminServicesRequestsActivity.this);
 
             }
         });
     }
 
-    private void populateCities(View view) {
+    private void populateCities() {
 
         if (!Places.isInitialized()) {
-            Places.initialize(getContext(), MyUtilities.PLACES_API_KEY);
+            Places.initialize(AdminServicesRequestsActivity.this, MyUtilities.PLACES_API_KEY);
 
         }
-        recyclerViewCities = view.findViewById(R.id.rv_cities);
+        recyclerViewCities = findViewById(R.id.rv_cities);
         et_city.addTextChangedListener(filterTextWatcherCities);
 
-        mAutoCompleteAdapterCities = new PlacesAutoCompleteAdapter(getContext(), TypeFilter.CITIES);
-        final LinearLayoutManager layoutManagerCities = new LinearLayoutManager(getContext());
-        final LinearLayoutManager layoutManagerAddress = new LinearLayoutManager(getContext());
-        recyclerViewCities.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAutoCompleteAdapterCities = new PlacesAutoCompleteAdapter(AdminServicesRequestsActivity.this, TypeFilter.CITIES);
+        final LinearLayoutManager layoutManagerCities = new LinearLayoutManager(AdminServicesRequestsActivity.this);
+        final LinearLayoutManager layoutManagerAddress = new LinearLayoutManager(AdminServicesRequestsActivity.this);
+        recyclerViewCities.setLayoutManager(new LinearLayoutManager(AdminServicesRequestsActivity.this));
         mAutoCompleteAdapterCities.setClickListener(new PlacesAutoCompleteAdapter.ClickListener() {
             @Override
             public void click(Place place) {
@@ -233,7 +230,7 @@ public class DevelopersFragment extends Fragment {
             }
         });
         recyclerViewCities.setAdapter(mAutoCompleteAdapterCities);
-        recyclerViewCities.addItemDecoration(new DividerItemDecoration(getContext(), layoutManagerCities.getOrientation()));
+        recyclerViewCities.addItemDecoration(new DividerItemDecoration(AdminServicesRequestsActivity.this, layoutManagerCities.getOrientation()));
 
     }
 
