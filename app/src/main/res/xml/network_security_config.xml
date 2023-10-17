@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">3.111.64.178/app/index.php/</domain>
+        <domain includeSubdomains="true">65.1.178.54</domain>
     </domain-config>
 </network-security-config>

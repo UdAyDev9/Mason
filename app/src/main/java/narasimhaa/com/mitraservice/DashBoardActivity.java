@@ -108,9 +108,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
         if (SharedPreferenceUtils.getValue(DashBoardActivity.this, MyUtilities.PREF_USER_TYPE).equals("Retailer") || SharedPreferenceUtils.getValue(DashBoardActivity.this, MyUtilities.PREF_USER_TYPE).equals("Customer")) {
             navigationView.getMenu().clear();
-            navigationView.inflateMenu(R.menu.nav_menu_for_admin);
+            navigationView.inflateMenu(R.menu.nav_menu_for_user);
             switchChangeStatus.setVisibility(View.INVISIBLE);
             tabLayout.setVisibility(View.VISIBLE);
+            availableTv.setVisibility(View.GONE);
             //viewPager.setVisibility(View.GONE);
             //tabLayout.setVisibility(View.GONE);
         } else if (SharedPreferenceUtils.getValue(DashBoardActivity.this, MyUtilities.PREF_USER_TYPE).equals("Developer")) {
@@ -702,17 +703,18 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         SharedPreferenceUtils.setValue(DashBoardActivity.this, MyUtilities.PREF_SER_PER_SEQ_ID, homePageBeanData.getSER_PER_SEQ_ID());
 
-                        if (homePageBeanData.getSTATUS().equals("ACTIVE")) {
+                        if (isDeveloper){
+                            if (homePageBeanData.getSTATUS().equals("ACTIVE")) {
+                                switchChangeStatus.setChecked(true);
+                                availableTv.setVisibility(View.VISIBLE);
+                                availableTv.setText("AVAILABLE");
+                            } else {
 
-                            switchChangeStatus.setChecked(true);
-                            availableTv.setVisibility(View.VISIBLE);
-                            availableTv.setText("AVAILABLE");
+                                switchChangeStatus.setChecked(false);
+                                availableTv.setVisibility(View.VISIBLE);
+                                availableTv.setText("UNAVAILABLE");
 
-                        } else {
-
-                            switchChangeStatus.setChecked(false);
-                            availableTv.setVisibility(View.VISIBLE);
-                            availableTv.setText("UNAVAILABLE");
+                            }
 
                         }
 

@@ -64,7 +64,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
     Button bt_reg;
     String uname, umobile, uemail, ustate, upincode, udistract, ucity, uservecetype, upassword;
     String respone = "";
-    private RecyclerView rvCities = null,rvAddress= null;
+    private RecyclerView rvCities = null, rvAddress = null;
     private PlacesAutoCompleteAdapter mAutoCompleteAdapterCities = null;
 
     JSONObject jsonoBject = null;
@@ -167,11 +167,11 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
 
                             Toast.makeText(RegistrationActivity.this, "Please Fill All Fields", Toast.LENGTH_LONG).show();
 
-                        }else {
+                        } else {
                             registerOrUpdate(isFromUpdate);
 
                         }
-                    }else{
+                    } else {
 
                         if (uname.equals("") || umobile.equals("") || uemail.equals("") || upincode.equals("") || upassword.equals("") || et_City.getText().toString().equals("") || etAddress.getText().toString().equals("") || selectedItem.equals("")) {
                             Toast.makeText(RegistrationActivity.this, "Please Fill All Fields", Toast.LENGTH_LONG).show();
@@ -289,7 +289,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
                     Toast.makeText(getApplicationContext(), "" + status, Toast.LENGTH_LONG).show();
 
                     Intent regintent = new Intent(RegistrationActivity.this, ValidateOtpActivity.class);
-                    regintent.putExtra("KEY_MOBILE_NO",umobile);
+                    regintent.putExtra("KEY_MOBILE_NO", umobile);
                     startActivity(regintent);
 
                 } else if (respone.trim().equals("failed")) {
@@ -480,11 +480,11 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
 
                         if (response.body().getStatus() == true) {
 
-                            if (isFromUpdate){
+                            if (isFromUpdate) {
 
                                 MyUtilities.showToast(RegistrationActivity.this, "Updated Successfully!!!");
 
-                            }else {
+                            } else {
 
                                 MyUtilities.showToast(RegistrationActivity.this, "Registered Successfully!!!");
 
@@ -493,12 +493,17 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
                             MyUtilities.cancelAlertDialog(RegistrationActivity.this);
                             Log.d("responsee", "onResponse: " + response.body().getStatus());
                             Log.e("responsee", "onResponse: " + response.body().getMsg());
+                            if (!isFromUpdate) {
+                                Intent regintent = new Intent(RegistrationActivity.this, ValidateOtpActivity.class);
+                                regintent.putExtra("KEY_MOBILE_NO", umobile);
+                                startActivity(regintent);
+                                finish();
 
-                            Intent regintent = new Intent(RegistrationActivity.this, ValidateOtpActivity.class);
-                            regintent.putExtra("KEY_MOBILE_NO",umobile);
-                            startActivity(regintent);
+                            } else {
+                                Intent intent = new Intent(RegistrationActivity.this, MyprofileActivity.class);
+                                startActivity(intent);
 
-                            finish();
+                            }
                         } else {
 
                             MyUtilities.showToast(RegistrationActivity.this, response.body().getMsg().toString());
@@ -520,7 +525,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
 
                 @Override
                 public void onFailure(Call<ServerResponse> call, Throwable t) {
-                    MyUtilities.showToast(RegistrationActivity.this,MyUtilities.KAlertDialogTitleError);
+                    MyUtilities.showToast(RegistrationActivity.this, MyUtilities.KAlertDialogTitleError);
                     MyUtilities.cancelAlertDialog(RegistrationActivity.this);
                 }
             });
