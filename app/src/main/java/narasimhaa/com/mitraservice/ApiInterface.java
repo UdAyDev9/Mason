@@ -22,7 +22,7 @@ import retrofit2.http.Query;
 
 public interface ApiInterface {
 
-    String URL_BASE = "http://65.1.178.54/app/index.php/";
+    String URL_BASE = "http://3.111.64.178/app/index.php/";
 
     @POST("Users/login.php")
     Call<ServerResponse> getLoginResponsee(@Body String body);
